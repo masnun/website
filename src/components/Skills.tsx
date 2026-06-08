@@ -1,41 +1,61 @@
-import { useState } from "react";
-import { skills } from "../data.ts";
+import { useEffect, useState } from "react";
+import { skills, type Skill } from "../data.ts";
 
 export function Skills() {
-  const [open, setOpen] = useState<Record<string, boolean>>({});
-  const toggle = (name: string) =>
-    setOpen((o) => ({ ...o, [name]: !o[name] }));
+  const [active, setActive] = useState<Skill | null>(null);
+
+  // Close on Escape.
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active]);
 
   return (
-    <div className="skill-list">
-      {skills.map((s) => {
-        const isOpen = !!open[s.name];
-        return (
-          <div key={s.name} className={`skill-item ${isOpen ? "is-open" : ""}`}>
+    <>
+      <div className="skill-pills">
+        {skills.map((s) => (
+          <button
+            key={s.name}
+            className="skill-pill"
+            onClick={() => setActive(s)}
+          >
+            {s.name}
+          </button>
+        ))}
+      </div>
+
+      {active && (
+        <div
+          className="modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label={active.name}
+          onClick={() => setActive(null)}
+        >
+          <div className="modal__panel" onClick={(e) => e.stopPropagation()}>
             <button
-              className="skill-item__head"
-              aria-expanded={isOpen}
-              onClick={() => toggle(s.name)}
+              className="modal__close"
+              aria-label="Close"
+              onClick={() => setActive(null)}
             >
-              <span className="skill-item__name">{s.name}</span>
-              <span className="skill-item__chevron" aria-hidden="true">
-                ›
-              </span>
+              ✕
             </button>
-            {isOpen && (
-              <div className="skill-item__body">
-                <p className="card__note">{s.blurb}</p>
-                <a
-                  className="skill-item__cta"
-                  href={`#/projects?skill=${encodeURIComponent(s.name)}`}
-                >
-                  See related projects →
-                </a>
-              </div>
-            )}
+            <h3 className="modal__title">{active.name}</h3>
+            <p className="modal__text">{active.blurb}</p>
+            <a
+              className="skill-item__cta"
+              href={`#/projects?skill=${encodeURIComponent(active.name)}`}
+              onClick={() => setActive(null)}
+            >
+              See related projects →
+            </a>
           </div>
-        );
-      })}
-    </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -19,9 +19,13 @@ export function ProjectDetail({ project }: { project: Project }) {
 
       <div className="project__tags">
         {project.tags.map((t) => (
-          <span key={t} className="project__tag">
+          <a
+            key={t}
+            className="project__tag project__tag--link"
+            href={`#/projects?tag=${encodeURIComponent(t)}`}
+          >
             {t}
-          </span>
+          </a>
         ))}
       </div>
 

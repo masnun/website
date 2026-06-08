@@ -5,12 +5,17 @@ type Props = {
   featuredOnly?: boolean;
   // When set, show only projects whose tags intersect this list.
   filterTags?: string[];
+  // When set, cap the number of projects shown.
+  limit?: number;
 };
 
-export function Projects({ featuredOnly = false, filterTags }: Props) {
+export function Projects({ featuredOnly = false, filterTags, limit }: Props) {
   let list = featuredOnly ? projects.filter((p) => p.featured) : projects;
   if (filterTags && filterTags.length) {
     list = list.filter((p) => p.tags.some((t) => filterTags.includes(t)));
+  }
+  if (limit) {
+    list = list.slice(0, limit);
   }
   return (
     <div className="cards">
@@ -20,9 +25,13 @@ export function Projects({ featuredOnly = false, filterTags }: Props) {
           <p className="card__note">{p.summary}</p>
           <div className="project__tags">
             {p.tags.map((t) => (
-              <span key={t} className="project__tag">
+              <a
+                key={t}
+                className="project__tag project__tag--link"
+                href={`#/projects?tag=${encodeURIComponent(t)}`}
+              >
                 {t}
-              </span>
+              </a>
             ))}
           </div>
           <a className="project__more" href={`#/project/${p.slug}`}>

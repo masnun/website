@@ -7,8 +7,8 @@ import { useHashRoute } from "../hooks/useHashRoute.ts";
 const links = [
   ["#/", "Home"],
   ["#/about", "About"],
-  ["#/projects", "Projects"],
   ["#/experience", "Experience"],
+  ["#/projects", "Projects"],
   ["#/writing", "Writing"],
   ["#/testimonials", "Testimonials"],
 ];

@@ -7,8 +7,6 @@ import { Projects } from "./components/Projects.tsx";
 import { ProjectsPage } from "./components/ProjectsPage.tsx";
 import { ProjectDetail } from "./components/ProjectDetail.tsx";
 import { Timeline } from "./components/Timeline.tsx";
-import { Freelance } from "./components/Freelance.tsx";
-import { Leadership } from "./components/Leadership.tsx";
 import { Testimonials } from "./components/Testimonials.tsx";
 import { Writing } from "./components/Writing.tsx";
 import { AboutPage } from "./components/AboutPage.tsx";
@@ -72,7 +70,7 @@ export default function App() {
         <Section
           id="work"
           title="Work Experience"
-          kicker="Employment & freelance · ~15 years"
+          kicker="Employment & freelance · 15+ years"
         >
           <div className="prose-stack">
             {workSummary.map((p, i) => (
@@ -96,9 +94,6 @@ export default function App() {
           kicker="Full-time roles & freelance, side by side"
         >
           <Timeline />
-        </Section>
-        <Section id="leadership" title="Leadership & Community" kicker="Giving back">
-          <Leadership />
         </Section>
       </main>
     );
@@ -141,15 +136,12 @@ export default function App() {
           </div>
         </Section>
         <Section id="projects" title="Featured Projects" kicker="What I've built">
-          <Projects featuredOnly />
+          <Projects featuredOnly limit={4} />
           <div className="section__more-wrap">
             <a className="btn btn--primary btn--round section__more-btn" href="#/projects">
               See all {projects.length} projects →
             </a>
           </div>
-        </Section>
-        <Section id="freelance" title="Freelance" kicker="Upwork track record">
-          <Freelance />
         </Section>
         <Section id="writing" title="Writing" kicker="In-depth technical posts">
           <p className="prose">

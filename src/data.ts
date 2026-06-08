@@ -4,6 +4,13 @@
 import smsDeliveryPlatform from "./content/sms-delivery-platform.md?raw";
 import jobAggregationMicroservice from "./content/job-aggregation-microservice.md?raw";
 import centralDataPipelineService from "./content/central-data-pipeline-service.md?raw";
+import marketingAnalyticsPlatform from "./content/marketing-analytics-platform.md?raw";
+import heimdallApiGateway from "./content/heimdall-api-gateway.md?raw";
+import userEngagementTracking from "./content/user-engagement-tracking.md?raw";
+import logoService from "./content/logo-service.md?raw";
+import textMessagingPlatform from "./content/text-messaging-platform.md?raw";
+import emailJobAlertPlatform from "./content/email-job-alert-platform.md?raw";
+import jobScrapingService from "./content/job-scraping-service.md?raw";
 
 export const profile = {
   name: "Abu Ashraf Masnun",
@@ -242,6 +249,76 @@ export const projects: Project[] = [
       "I designed and built the central data pipeline that unifies analytics from an entire product suite into one warehouse. 10+ internal services and platforms send their events to a single API; the service validates, batches, deduplicates, transforms and lands them in Snowflake for business reporting across 60+ event types. I engineered it to never lose or duplicate an event, to stream large batches through with flat memory, and to onboard a new data source by config alone — the kind of reliable backbone every BI dashboard in the company sits downstream of.",
     markdown: centralDataPipelineService,
     tags: ["Node.js", "Koa", "BullMQ", "Redis", "MongoDB", "Snowflake"],
+  },
+  {
+    slug: "marketing-analytics-platform",
+    name: "Marketing Analytics Data Platform",
+    summary:
+      "Polyglot Go + Node.js platform turning real-time ad traffic into ROI analytics — ingesting click events at the edge, enriching with cross-network ad spend, and warehousing to Snowflake for Metabase dashboards.",
+    details:
+      "I designed and built an end-to-end marketing analytics platform — a suite of services that turns raw advertising traffic into the numbers a business uses to decide where its ad money goes. It ingests click-level traffic and conversion events in real time, enriches each one with ad-spend data from the major search, social and push ad networks, and lands the unified result in Snowflake for ROI attribution and campaign analytics. Built across Go and Node.js with real-time, queue-driven and scheduled-batch architectures — each chosen to fit the failure modes of the source it talks to — it solves the hard problem that every ad network reports money differently, late and messily, while the business still needs one trustworthy answer to what a campaign earned versus what it cost.",
+    markdown: marketingAnalyticsPlatform,
+    tags: ["Go", "Node.js", "AWS Lambda", "Asynq", "BullMQ", "MongoDB", "Snowflake"],
+  },
+  {
+    slug: "heimdall-api-gateway",
+    name: "Heimdall — API Caching Gateway",
+    summary:
+      "A caching gateway in front of paid email/phone verification APIs — read-through caching, multi-provider fallback and usage analytics — built twice, idiomatically in both Node.js and Go.",
+    details:
+      "Heimdall is a caching gateway that sits in front of paid third-party verification APIs — email validation and phone-number lookups — and shields the business from their cost and latency. It checks its own cache before ever calling a provider, falls back gracefully across multiple email vendors so a single outage never breaks verification, and tracks its own cache-hit savings in concurrency-safe daily buckets. I built it in Go first (Chi, MySQL), then re-implemented it in Node.js (Koa, MongoDB) to scale the service across the development team — more developers knew Node and could own and extend it — with the Node.js version also growing the feature set to add phone lookups and multi-provider fallback.",
+    markdown: heimdallApiGateway,
+    tags: ["Go", "Node.js", "Koa", "Chi", "MongoDB", "Caching"],
+  },
+  {
+    slug: "user-engagement-tracking",
+    name: "User Engagement Tracking",
+    summary:
+      "Python/Flask + Celery engine tracking opens, clicks and unsubscribes across 20+ job-board brands — millisecond redirects up front, asynchronous event recording and real-time webhooks behind.",
+    details:
+      "A user-engagement-tracking engine behind a suite of job-board marketing campaigns. Every marketing email and SMS carries trackable links and an invisible tracking pixel that point back to Tracer; it records who opened, clicked and unsubscribed, then fires those events as real-time webhooks to the originating platform. I built it for the unglamorous-but-critical job of being fast and always-on: a redirect or pixel hit resolves in milliseconds while the heavier work of recording the event and notifying downstream systems runs asynchronously on a background task queue. A single multi-tenant deployment serves 20+ brands, with short encoded redirect links, bot filtering to keep metrics honest, and encryption of personal data carried in URLs.",
+    markdown: userEngagementTracking,
+    tags: ["Python", "Flask", "Celery", "Redis", "MongoDB"],
+  },
+  {
+    slug: "logo-service",
+    name: "Logo Service",
+    summary:
+      "Team-built company-logo delivery service. My layer: BullMQ background workers, concurrent keyword-enrichment cron, an architecture restructure, observability and Docker/CI.",
+    details:
+      "Logo Service is a company-logo management and delivery service — the single source of truth for brand logos across a product suite, where any app asks for a company by name and gets back a CDN-hosted logo matched through a search engine. It's a team project; the original logo CRUD, search and asset pipeline were built by another engineer before I joined. My contribution turned it from a request/response API into a self-maintaining, observable, production-grade service: I introduced a background workers layer (BullMQ over Redis) to move slow work off the request path, built the scheduling system that enriches every company with related keywords from an external service — distributing that work across concurrent tasks so it runs in parallel — restructured the codebase into clear data/web/worker layers and refactored the Mongo connection pool, wired in Sentry and New Relic across all processes, and added the Docker, docker-compose, GitHub Actions and process-manager setup.",
+    markdown: logoService,
+    tags: ["Node.js", "BullMQ", "Redis", "MongoDB", "Sentry", "Docker"],
+  },
+  {
+    slug: "text-messaging-platform",
+    name: "Text Messaging Platform",
+    summary:
+      "Multi-tenant SMS job-alert platform I owned end to end — lead ingestion, timezone-aware scheduling, multi-carrier delivery, two-way opt-out compliance and a React analytics dashboard. Built first in Python, then rewritten in Node.js.",
+    details:
+      "A multi-tenant SMS job-alert platform I designed, built and ran end to end — ingesting leads, scheduling personalized text alerts, delivering them across multiple carriers, handling opt-outs and replies, and reporting revenue back to the business across 20+ job-board brands. I built it twice: first in Python (Flask + Celery), which I operated for several years, then rewrote the backend in Node.js (Koa + a Redis-backed job queue) for a cleaner architecture, with a dedicated React/Material-UI management-and-analytics dashboard on top. It does timezone-aware sending, multi-provider delivery with fallback, two-way STOP/compliance handling, encrypted click tracking and per-brand revenue accounting. This is a separate, earlier system from the Go-based SMS Delivery Platform elsewhere in this portfolio — that one is a later high-throughput delivery engine; this is the lead-alert messaging platform and its rewrite.",
+    markdown: textMessagingPlatform,
+    tags: ["Python", "Node.js", "React", "Celery", "Koa", "MongoDB"],
+  },
+  {
+    slug: "email-job-alert-platform",
+    name: "Email Job-Alert Platform",
+    summary:
+      "Distributed Python/Celery worker platform sending daily personalized job-alert emails across 8 partner brands — with a self-scaling worker fleet that spawns workers in proportion to queue depth. Built and run solo over ~4 years.",
+    details:
+      "A distributed background-processing platform that powered daily personalized job-alert emails across a network of eight job-board brands. It ingests candidate leads from partner boards, validates and deduplicates them, sends each candidate a tailored daily email of matching jobs, tracks engagement (opens, clicks, unsubscribes) via provider webhooks, and auto-unsubscribes people as they go cold. The standout is operational: a scheduler measures each queue's depth every few minutes and dynamically spawns workers in proportion to the backlog, so the system absorbs surges without manual capacity tuning. A single multi-tenant Celery pipeline — ingest, validate, welcome, queue, send, track, clean up — is parameterized per brand across prioritized queues, with throttling, failover routing and full observability. I designed, built and operated it single-handedly over roughly four years; it's the email sibling of the Text Messaging Platform.",
+    markdown: emailJobAlertPlatform,
+    tags: ["Python", "Celery", "MongoDB", "Redis", "Flask"],
+  },
+  {
+    slug: "job-scraping-service",
+    name: "Large Scale Job Scraping Service",
+    summary:
+      "A team-built service that scrapes hundreds of employer career sites. I was the original architect — built the distributed crawl engine (Bull queues, headless browsers), crawl-ID tracking, API, scheduler and React dashboard; the team scaled it to 750+ scrapers.",
+    details:
+      "A large-scale job-scraping service that crawls the career sites of hundreds of employers, extracts open positions, and feeds them as structured data into a job-board business. It's a team project that I founded and architected. I built the core engine — a queue-based distributed crawl orchestration system (Bull over Redis) running many headless-browser scrapers concurrently with tuned concurrency and locking, the store/aggregate tasks, and a crawl-ID system that ties every job back to its crawl run for per-crawl and per-employer stats. I also built the cron scheduling, a CLI, the web API for crawl status and job counts, the initial React monitoring dashboard, and the first batch of scrapers that set the shared template. The team then scaled that foundation to 750+ employer scrapers over the following couple of years.",
+    markdown: jobScrapingService,
+    tags: ["Node.js", "Puppeteer", "Bull", "Redis", "MongoDB", "React"],
   },
   {
     slug: "realtime-chat-conferencing",

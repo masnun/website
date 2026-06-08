@@ -1,10 +1,11 @@
 import { testimonials } from "../data.ts";
 
-export function Testimonials() {
+export function Testimonials({ limit }: { limit?: number }) {
   const sorted = [...testimonials].sort((a, b) => b.quote.length - a.quote.length);
+  const shown = limit ? sorted.slice(0, limit) : sorted;
   return (
     <div className="quotes">
-      {sorted.map((t, i) => (
+      {shown.map((t, i) => (
         <blockquote key={i} className="quote">
           {t.rating ? (
             <div className="quote__stars" aria-label={`${t.rating} out of 5`}>

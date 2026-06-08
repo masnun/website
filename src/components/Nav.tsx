@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import { profile } from "../data.ts";
+import { useHashRoute } from "../hooks/useHashRoute.ts";
 
 // href is a full hash target: "#anchor" scrolls the home page,
 // "#/page" routes to a sub-page.
 const links = [
-  ["#about", "About"],
+  ["#/", "Home"],
+  ["#/about", "About"],
   ["#/projects", "Projects"],
-  ["#/freelance", "Freelance"],
   ["#/experience", "Experience"],
-  ["#testimonials", "Testimonials"],
-  ["#contact", "Contact"],
+  ["#/writing", "Writing"],
+  ["#/testimonials", "Testimonials"],
 ];
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const route = useHashRoute();
+  // Normalize home ("" or "/") so the Home pill highlights correctly.
+  const current = route === "" ? "/" : route;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -31,11 +35,21 @@ export function Nav() {
       </a>
 
       <nav className={`nav__links ${open ? "nav__links--open" : ""}`}>
-        {links.map(([href, label]) => (
-          <a key={href} href={href} onClick={() => setOpen(false)}>
-            {label}
-          </a>
-        ))}
+        {links.map(([href, label]) => {
+          const target = href.replace(/^#/, "");
+          const active =
+            target === "/" ? current === "/" : current === target;
+          return (
+            <a
+              key={href}
+              href={href}
+              className={active ? "is-active" : ""}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </a>
+          );
+        })}
       </nav>
 
       <div className="nav__actions">

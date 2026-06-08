@@ -38,6 +38,7 @@ export const profile = {
   ],
   location: "Khulna, Bangladesh",
   phone: "+8801711 960803",
+  whatsapp: "https://wa.me/8801711960803",
   email: "masnun@gmail.com",
   website: "masnun.com",
   github: "github.com/masnun",
@@ -45,7 +46,229 @@ export const profile = {
   cv: "Abu Ashraf Masnun - CV.pdf",
   summary:
     "With close to 15 years of professional experience, I build systems that scale to millions of users per month. I'm deeply focused on software architecture and system design, and over the years I've built high-scale distributed systems for clients across Python, Go, Node.js and PHP. I reach for boring, proven technology when the goal is to ship something that lasts, work the agile way, and do my best work on a team — sharing what I know and learning from everyone around me. Open source is close to my heart; in my spare time you'll usually find me on developer forums, helping others get unstuck.",
+  // Longer narrative for the dedicated "About Me" page (#/about).
+  // Rendered as paragraphs.
+  about: [
+    "I've been writing code since 2006. I started as a self-taught teenager in Khulna, Bangladesh — building entire mobile community sites in PHP because I wanted to see if I could, and because people actually used the things I made. That itch never went away. Two decades later it's still the same loop: find something I don't understand, build the smallest real version of it, and keep going until it clicks.",
+    "I'm a business graduate (BBA, Khulna University) who chose engineering anyway. I went professional with PHP in 2008 and started freelancing on oDesk — now Upwork — in 2009, working directly with founders and teams around the world. The PHP years were good to me: Laravel, Symfony, CodeIgniter, WordPress, plenty of shipped product. But somewhere along the way I fell hard for Python, and Django and DRF became the tools I reached for first. Since then I've never stopped collecting languages — Go and Node.js are daily drivers now, and Clojure, Elixir, Kotlin, Rust and others have all earned real projects.",
+    "Today my work lives on the backend, at the architecture and distributed-systems end of it. For close to 15 years I've built systems that have to stay up while serving millions of people a month — email and SMS delivery platforms, real-time analytics pipelines, job-scraping fleets, API gateways, lead routers. The problems I enjoy most are the unglamorous-but-critical ones: concurrency and async (Python's asyncio internals and the GIL, Go's goroutines), real-time systems on Django Channels and ASGI, exactly-once data pipelines, and clean REST API design. I care about why a thing works, not just that it does.",
+    "I have strong opinions held loosely. I reach for boring, proven technology when the goal is to ship something that lasts — Celery, Redis, MongoDB, Postgres, MySQL — and I pick the right tool per failure mode rather than the trendiest one on the timeline. I deploy what I build: Linux with nginx, uWSGI and Daphne, Docker, and serverless on AWS Lambda via Zappa and Apex, across AWS, Heroku and Rackspace. And I increasingly get brought in as a polyglot code reviewer — auditing PHP, Python, Node.js, Go and Java codebases — because reading other people's systems is its own kind of fun.",
+    "Sharing what I know matters to me as much as the building. I co-founded Python Bangladesh, the country's largest Python user group, founded NodeSchool Khulna, help moderate phpXperts (the largest PHP group in Bangladesh), and co-founded Google Business Group Khulna. I speak at local conferences and record screencasts in my mother tongue so more people can get started. Hundreds of blog posts on masnun.com and masnun.rocks are the most honest record of how I think — less tutorial, more how things actually work under the hood.",
+    "When I'm not building, you'll usually find me on developer forums helping someone get unstuck, learning a language I have no immediate use for, or watching Doctor Who. I'm deeply driven, genuinely curious, and at my best on a team — learning from everyone around me and passing it on.",
+  ],
 };
+
+export type Milestone = {
+  year: string;
+  title: string;
+  text: string;
+};
+
+// A visual career/journey timeline for the About page — milestones, not jobs.
+export const journey: Milestone[] = [
+  {
+    year: "2006",
+    title: "Wrote my first code",
+    text: "Self-taught teenager in Khulna, building full mobile community and forum sites in PHP for fun — and people actually used them.",
+  },
+  {
+    year: "2008",
+    title: "Went professional",
+    text: "Turned the hobby into a career with paid PHP development — Laravel, Symfony, CodeIgniter, WordPress.",
+  },
+  {
+    year: "2009",
+    title: "Started freelancing",
+    text: "Joined oDesk (now Upwork) and began working directly with founders and teams worldwide — a thread that still runs through my career.",
+  },
+  {
+    year: "2012",
+    title: "Fell for Python",
+    text: "Python, Django and DRF became my first reach. The backend-and-APIs chapter of my career really begins here.",
+  },
+  {
+    year: "2014",
+    title: "Built systems that lasted",
+    text: "Shipped the Khulna University exam & result system that ran in production for nine years, and began multi-year code-review engagements.",
+  },
+  {
+    year: "2015",
+    title: "Into high-scale distributed systems",
+    text: "Started building email & SMS platforms and data pipelines serving millions a month — Python and Celery, then Node.js and Go.",
+  },
+  {
+    year: "2016",
+    title: "Picked up Go & started writing deeply",
+    text: "Added Go to the toolbox, launched masnun.rocks, and co-founded Python Bangladesh, the country's largest Python community.",
+  },
+  {
+    year: "2017–2022",
+    title: "Real-time at scale",
+    text: "Drove a five-year, full-stack real-time analytics platform and a fleet of Go and Node.js microservices end to end.",
+  },
+  {
+    year: "Now",
+    title: "Technical architect & polyglot reviewer",
+    text: "Designing distributed systems across Python, Go and Node.js — and auditing codebases across five languages for teams who want a second set of eyes.",
+  },
+];
+
+export type BlogPost = {
+  title: string;
+  url: string;
+  // One-line on why it's worth reading.
+  blurb: string;
+  tags: string[];
+};
+
+export type BlogCategory = {
+  category: string;
+  posts: BlogPost[];
+};
+
+// Hand-picked, in-depth technical writing from masnun.com and masnun.rocks —
+// the posts that best show how I reason about systems, not the install guides.
+export const blogPosts: BlogCategory[] = [
+  {
+    category: "Async & Concurrency",
+    posts: [
+      {
+        title: "Async Python: The Different Forms of Concurrency",
+        url: "http://masnun.rocks/2016/10/06/async-python-the-different-forms-of-concurrency/",
+        blurb:
+          "Threads vs. processes vs. asyncio, the GIL, and when each model actually wins. My favorite single piece.",
+        tags: ["Python", "asyncio", "Concurrency"],
+      },
+      {
+        title: "Exploring Asyncio — uvloop, sanic and motor",
+        url: "http://masnun.rocks/2016/11/17/exploring-asyncio-uvloop-sanic-motor/",
+        blurb:
+          "Building a full async stack end to end — event loop, web framework and database driver — and what it buys you.",
+        tags: ["Python", "asyncio", "Performance"],
+      },
+      {
+        title: "Generators, Coroutines, Native Coroutines and async/await",
+        url: "https://masnun.com/python-generators-coroutines-native-coroutines-and-async-await/",
+        blurb:
+          "How Python's concurrency model evolved from generators to native coroutines — and why each step happened.",
+        tags: ["Python", "Coroutines"],
+      },
+      {
+        title: "Python asyncio: Future, Task and the Event Loop",
+        url: "https://masnun.com/python-asyncio-future-task-and-the-event-loop/",
+        blurb:
+          "A look under asyncio's hood at the primitives the event loop actually schedules.",
+        tags: ["Python", "asyncio"],
+      },
+      {
+        title: "A Quick Introduction to the concurrent.futures Module",
+        url: "https://masnun.com/python-a-quick-introduction-to-the-concurrent-futures-module/",
+        blurb:
+          "Thread and process pools through one clean executor API, and where each fits.",
+        tags: ["Python", "Concurrency"],
+      },
+    ],
+  },
+  {
+    category: "Language Internals & Design",
+    posts: [
+      {
+        title: "Interfaces in Python: Protocols and ABCs",
+        url: "http://masnun.rocks/2017/04/15/interfaces-in-python-protocols-and-abcs/",
+        blurb:
+          "From informal duck typing to formal contracts with abstract base classes.",
+        tags: ["Python", "Design"],
+      },
+      {
+        title: "Understanding Decorators in Python",
+        url: "https://masnun.com/understanding-decorators-in-python/",
+        blurb:
+          "Decorators built from first principles — closures, wrapping and why they read the way they do.",
+        tags: ["Python"],
+      },
+      {
+        title: "Composition Over Inheritance",
+        url: "https://masnun.com/composition-over-inheritance/",
+        blurb:
+          "Why deep class hierarchies hurt, and how composition keeps designs flexible.",
+        tags: ["Design", "OOP"],
+      },
+    ],
+  },
+  {
+    category: "Go & Distributed Systems",
+    posts: [
+      {
+        title: "Distributed Task Processing in Go",
+        url: "http://masnun.rocks/2016/11/01/distributed-task-processing-in-golang/",
+        blurb:
+          "A Celery-style distributed task queue in Go using machinery — the patterns behind background work at scale.",
+        tags: ["Go", "Distributed Systems"],
+      },
+      {
+        title: "Golang: Building a Telegram Bot for Aggregating Content",
+        url: "http://masnun.rocks/2016/11/05/golang-building-a-telegram-bot-for-aggregating-content/",
+        blurb:
+          "A real, concurrent Go service end to end — fetching, aggregating and serving content.",
+        tags: ["Go", "Concurrency"],
+      },
+      {
+        title: "Golang Interface",
+        url: "https://masnun.com/golang-interface/",
+        blurb:
+          "How Go's implicit interfaces work and why they shape idiomatic Go design.",
+        tags: ["Go"],
+      },
+    ],
+  },
+  {
+    category: "Real-Time & API Design",
+    posts: [
+      {
+        title: "Introduction to Django Channels",
+        url: "http://masnun.rocks/2016/09/25/introduction-to-django-channels/",
+        blurb:
+          "Bringing WebSockets and async to Django — the ASGI shift, explained.",
+        tags: ["Python", "Django", "WebSockets"],
+      },
+      {
+        title: "Django Channels: Using Custom Channels",
+        url: "http://masnun.rocks/2016/11/27/django-channels-using-custom-channels/",
+        blurb:
+          "Going beyond the defaults to model your own message channels.",
+        tags: ["Python", "Django", "Real-time"],
+      },
+      {
+        title: "Deploying Django Channels using Daphne",
+        url: "http://masnun.rocks/2016/11/02/deploying-django-channels-using-daphne/",
+        blurb:
+          "Taking an ASGI app to production with the Daphne server.",
+        tags: ["Python", "Django", "Deployment"],
+      },
+      {
+        title: "Django Admin: Expensive COUNT(*) Queries",
+        url: "http://masnun.rocks/2017/03/20/django-admin-expensive-count-all-queries/",
+        blurb:
+          "Diagnosing a real database performance problem hiding inside the Django admin.",
+        tags: ["Django", "Databases", "Performance"],
+      },
+      {
+        title: "Understanding JWT (JSON Web Tokens)",
+        url: "https://masnun.com/understanding-jwt-json-web-tokens/",
+        blurb:
+          "What a JWT actually is, how it's signed, and where stateless auth fits.",
+        tags: ["Security", "APIs", "Auth"],
+      },
+      {
+        title: "REST APIs: Concepts and Applications",
+        url: "https://masnun.com/rest-apis-concepts-applications/",
+        blurb:
+          "The principles behind REST before reaching for a framework.",
+        tags: ["APIs", "REST"],
+      },
+    ],
+  },
+];
 
 export type Skill = {
   name: string;
@@ -544,12 +767,12 @@ export const ossProjects: OssProject[] = [
 ];
 
 export const leadership: string[] = [
-  'Active moderator of the largest PHP user group of Bangladesh, "phpXperts"',
+  'Was an active moderator of the largest PHP user group of Bangladesh, "phpXperts"',
   "Co-founded Python Bangladesh — the largest Python user group in the country",
   "Founded NodeSchool Khulna to help others learn JavaScript and Node.js",
-  "Co-founder of Google Business Group Khulna, connecting people with business and technology",
-  "Regular speaker at local PHP & Python conferences",
-  "Writes blog posts and records screencasts in his mother language to help others learn",
+  "Co-founded Google Business Group Khulna, connecting people with business and technology",
+  "Was a regular speaker at local PHP & Python conferences",
+  "Wrote blog posts and recorded screencasts in my mother language to help others learn",
 ];
 
 export type Engagement = {
@@ -566,9 +789,10 @@ export const freelance = {
   // Narrative summary synthesized from ~58 completed jobs, with the headline
   // numbers woven in casually. Rendered as paragraphs.
   summary: [
-    "I've freelanced on Upwork (back when it was called oDesk) since 2009 — 58 completed jobs, 2.9K+ hours logged, and a 4.7★ rating across 57 client reviews. It's where a lot of my career actually happened, working directly with founders and teams around the world.",
+    "I freelanced on Upwork (back when it was called oDesk) from 2009 through 2021 — 58 completed jobs, 2.9K+ hours logged, and a 4.7★ rating across 57 client reviews. It's where a lot of my career actually happened, working directly with founders and teams around the world.",
     "Most of that work was backend. I built Python and Django REST Framework APIs powering mobile apps, an online sports-booking platform for a Portuguese startup, large-scale web crawlers, and a steady stream of email and web-automation systems. In my earlier years I shipped plenty of PHP, Laravel, CodeIgniter and WordPress work too — everything from custom plugins to full sites. More recently, clients increasingly bring me in as a polyglot code reviewer, auditing PHP, Python, Node.js, Go and Java codebases for quality and best practices.",
     "What I'm proudest of is that clients keep coming back. One code-review engagement ran from 2014 all the way to 2017; the PEEMZ backend team rehired me across four separate contracts. The feedback has been consistent for over a decade — clear, well-documented, efficient code, delivered fast, with communication people can rely on. One client, after going through 30 developers in 12 years, said I was the one who 'withstood.'",
+    "I haven't taken on freelance work in a few years now — a full-time role has had my focus. But I'm still open to the right proposal. If you've got an interesting problem, feel free to reach out.",
   ],
   engagements: [
     { title: "Code Reviewer — PHP, Python, Node.js, Go & Java", period: "Jan 2021 – Jul 2021", rating: 5, tags: ["Code Review", "Polyglot"] },
@@ -583,6 +807,16 @@ export const freelance = {
     { title: "Code Reviewer — Python", period: "Sep 2014 – Feb 2017", rating: 5, tags: ["Code Review", "Long-term"] },
   ] as Engagement[],
 };
+
+// Combined narrative of my work experience — full-time employment and
+// freelance — shown above the Career Timeline on the Experience page.
+export const workSummary: string[] = [
+  "My experience runs along two tracks that overlapped for years: full-time engineering roles and a long freelance career. Together they add up to close to 15 years of building backend and distributed systems for the web.",
+  "On the employment side, I've spent the better part of a decade at Local Staffing LLC as a senior full-stack engineer, building systems that serve millions of people a month — from large monoliths to high-scale microservices across Python, Node.js and Go. My main focus has been a high-throughput email & SMS delivery platform, along with the data pipelines, API gateways and internal tools that keep it running. Before that I built mobile-app backends at Durlov (Django REST Framework, Celery, and realtime chat over Django Channels) and led a web team at Transcendio.",
+  "Earlier roles took me across the stack and the industry: an online sports-booking platform for a Portuguese startup (AirCourts), SaaS work at okdo.it where I doubled as product coordinator, and my formative PHP-and-Python years at Leevio, Vitzo and BRE. I've been shipping for the web since 2009 and haven't stopped since.",
+  "Alongside the day jobs, I freelanced on Upwork (back when it was called oDesk) from 2009 through 2021 — 58 completed jobs, 2.9K+ hours logged, and a 4.7★ rating across 57 reviews. Most of it was backend: Python and DRF APIs for mobile apps, large-scale web crawlers, and a steady stream of email and automation systems, with plenty of PHP, Laravel and WordPress in the early years. Later, clients increasingly brought me in as a polyglot code reviewer across PHP, Python, Node.js, Go and Java. What I'm proudest of is that clients kept coming back — the PEEMZ team rehired me across four separate contracts, and one code-review engagement ran from 2014 to 2017.",
+  "I haven't taken on freelance work in a few years now — a full-time role has had my focus. But I'm still open to the right proposal. If you've got an interesting problem, feel free to reach out.",
+];
 
 export type Testimonial = {
   quote: string;

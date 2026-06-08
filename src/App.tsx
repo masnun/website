@@ -8,12 +8,12 @@ import { ProjectsPage } from "./components/ProjectsPage.tsx";
 import { ProjectDetail } from "./components/ProjectDetail.tsx";
 import { Timeline } from "./components/Timeline.tsx";
 import { Freelance } from "./components/Freelance.tsx";
-import { Explored } from "./components/Explored.tsx";
 import { Leadership } from "./components/Leadership.tsx";
 import { Testimonials } from "./components/Testimonials.tsx";
-import { Contact } from "./components/Contact.tsx";
+import { Writing } from "./components/Writing.tsx";
+import { AboutPage } from "./components/AboutPage.tsx";
 import { useHashRoute } from "./hooks/useHashRoute.ts";
-import { profile, projects } from "./data.ts";
+import { profile, projects, workSummary } from "./data.ts";
 
 // A simple page banner reused by the sub-pages.
 function PageHead({ kicker, title }: { kicker: string; title: string }) {
@@ -66,23 +66,61 @@ export default function App() {
         <Section id="skills" title="Skills" kicker="What I work with">
           <Skills />
         </Section>
-        <Section id="timeline" title="Work History" kicker="Where I've worked">
-          <Timeline />
+        <Section
+          id="work"
+          title="Work Experience"
+          kicker="Employment & freelance · ~15 years"
+        >
+          <div className="prose-stack">
+            {workSummary.map((p, i) => (
+              <p key={i} className="prose">
+                {p}
+              </p>
+            ))}
+          </div>
+          <a
+            className="btn btn--ghost section__more"
+            href={profile.upwork}
+            target="_blank"
+            rel="noreferrer"
+          >
+            View full Upwork profile ↗
+          </a>
         </Section>
-        <Section id="explored" title="Things I've Explored" kicker="Curiosity log">
-          <Explored />
+        <Section
+          id="timeline"
+          title="Career Timeline"
+          kicker="Full-time roles & freelance, side by side"
+        >
+          <Timeline />
         </Section>
         <Section id="leadership" title="Leadership & Community" kicker="Giving back">
           <Leadership />
         </Section>
       </main>
     );
-  } else if (route === "/freelance") {
+  } else if (route === "/about") {
     content = (
       <main>
-        <PageHead kicker="Upwork track record" title="Freelance" />
-        <Section id="freelance" title="On Upwork" kicker="Since 2009 · 4.7★ · 58 jobs">
-          <Freelance full />
+        <PageHead kicker="Who I am" title="About Me" />
+        <AboutPage />
+      </main>
+    );
+  } else if (route === "/writing") {
+    content = (
+      <main>
+        <PageHead kicker="In-depth technical posts" title="Writing" />
+        <Section id="writing" title="Selected Posts" kicker="What I've written">
+          <Writing />
+        </Section>
+      </main>
+    );
+  } else if (route === "/testimonials") {
+    content = (
+      <main>
+        <PageHead kicker="What people say" title="Testimonials" />
+        <Section id="testimonials" title="Client Feedback" kicker="From Upwork & beyond">
+          <Testimonials />
         </Section>
       </main>
     );
@@ -91,13 +129,18 @@ export default function App() {
     content = (
       <main>
         <Hero />
-        <Section id="about" title="Summary" kicker="Who I am">
+        <Section id="about" title="About Me" kicker="Who I am">
           <p className="prose">{profile.summary}</p>
+          <div className="section__more-wrap section__more-wrap--left">
+            <a className="btn btn--primary section__more-btn" href="#/about">
+              More about me →
+            </a>
+          </div>
         </Section>
         <Section id="projects" title="Featured Projects" kicker="What I've built">
           <Projects featuredOnly />
           <div className="section__more-wrap">
-            <a className="btn btn--primary section__more-btn" href="#/projects">
+            <a className="btn btn--primary btn--round section__more-btn" href="#/projects">
               See all {projects.length} projects →
             </a>
           </div>
@@ -105,11 +148,27 @@ export default function App() {
         <Section id="freelance" title="Freelance" kicker="Upwork track record">
           <Freelance />
         </Section>
-        <Section id="testimonials" title="Testimonials" kicker="What people say">
-          <Testimonials />
+        <Section id="writing" title="Writing" kicker="In-depth technical posts">
+          <p className="prose">
+            I write long-form technical posts on masnun.rocks and masnun.com —
+            less tutorial, more how things actually work under the hood. The
+            recurring themes: async and concurrency in Python, language
+            internals and design, Go and distributed systems, and building
+            real-time systems and clean REST APIs.
+          </p>
+          <div className="section__more-wrap section__more-wrap--left">
+            <a className="btn btn--primary section__more-btn" href="#/writing">
+              Read my writing →
+            </a>
+          </div>
         </Section>
-        <Section id="contact" title="Get in touch" kicker="Say hello">
-          <Contact />
+        <Section id="testimonials" title="Testimonials" kicker="What people say">
+          <Testimonials limit={2} />
+          <div className="section__more-wrap section__more-wrap--left">
+            <a className="btn btn--primary section__more-btn" href="#/testimonials">
+              Read all testimonials →
+            </a>
+          </div>
         </Section>
       </main>
     );

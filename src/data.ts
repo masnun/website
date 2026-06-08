@@ -27,23 +27,24 @@ import mobileCommunityForum from "./content/mobile-community-forum.md?raw";
 
 export const profile = {
   name: "Abu Ashraf Masnun",
-  tagline: "PASSIONATE SOFTWARE CRAFTSMAN",
+  tagline: "Distributed Systems · Python · Go · Node.js",
   // Rotating words for the animated hero headline.
   roles: [
-    "Full Stack Developer",
+    "Technical Architect",
+    "Backend Engineer",
+    "Distributed Systems Engineer",
     "Pythonista",
     "Gopher",
-    "Backend Engineer",
-    "OSS Enthusiast",
   ],
   location: "Khulna, Bangladesh",
   phone: "+8801711 960803",
   email: "masnun@gmail.com",
   website: "masnun.com",
   github: "github.com/masnun",
+  upwork: "https://www.upwork.com/freelancers/abuashrafmasnun",
   cv: "Abu Ashraf Masnun - CV.pdf",
   summary:
-    "I'm a full stack developer who genuinely enjoys building software. New tools excite me, but I've learned to reach for boring, proven technology when the goal is to ship something that lasts. I work the agile way and do my best work on a team — sharing what I know and learning from everyone around me. Open source is close to my heart; in my spare time you'll usually find me on developer forums, answering questions and helping others get unstuck.",
+    "With close to 15 years of professional experience, I build systems that scale to millions of users per month. I'm deeply focused on software architecture and system design, and over the years I've built high-scale distributed systems for clients across Python, Go, Node.js and PHP. I reach for boring, proven technology when the goal is to ship something that lasts, work the agile way, and do my best work on a team — sharing what I know and learning from everyone around me. Open source is close to my heart; in my spare time you'll usually find me on developer forums, helping others get unstuck.",
 };
 
 export type Skill = {
@@ -230,11 +231,14 @@ export type Project = {
   markdown?: string;
   tags: string[];
   link?: string;
+  // Surfaced on the slim homepage.
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
   {
     slug: "sms-delivery-platform",
+    featured: true,
     name: "SMS Delivery Platform",
     summary:
       "Go platform I designed and built that reliably delivers 400k+ SMS per day across multiple brands — driving revenue while staying fully compliant.",
@@ -255,6 +259,7 @@ export const projects: Project[] = [
   },
   {
     slug: "central-data-pipeline-service",
+    featured: true,
     name: "Central Data Pipeline Service",
     summary:
       "Central Node.js data pipeline routing analytics events from 20+ apps and 60+ event types into Snowflake — built memory-flat, exactly-once, and extensible by config.",
@@ -265,6 +270,7 @@ export const projects: Project[] = [
   },
   {
     slug: "marketing-analytics-platform",
+    featured: true,
     name: "Marketing Analytics Data Platform",
     summary:
       "Polyglot Go + Node.js platform turning real-time ad traffic into ROI analytics — ingesting click events at the edge, enriching with cross-network ad spend, and warehousing to Snowflake for Metabase dashboards.",
@@ -385,6 +391,7 @@ export const projects: Project[] = [
   },
   {
     slug: "custom-worker-framework",
+    featured: true,
     name: "Custom Background-Worker Framework",
     summary:
       "A Python background-worker framework I designed from scratch — worker-as-plugin base class, lazy dependency injection, centralized error handling, CLI + daemon execution and graceful shutdown — plus the lead/email/SMS pipeline (20+ jobs) built on it.",
@@ -415,6 +422,7 @@ export const projects: Project[] = [
   },
   {
     slug: "realtime-analytics-platform",
+    featured: true,
     name: "Real-Time Campaign Analytics Platform",
     summary:
       "A full-stack, real-time marketing analytics platform built over 5 years — concurrent fault-tolerant event ingestion with backpressure, per-minute multi-dimensional aggregation, and a React dashboard of live charts and cohort reports. I drove the backend and led the frontend.",
@@ -435,6 +443,7 @@ export const projects: Project[] = [
   },
   {
     slug: "university-ems",
+    featured: true,
     name: "University Exam & Result Management System",
     summary:
       "A Django exam/result management system I built solo for Khulna University's Business Administration Discipline and ran in production for 9 years — course registration, multi-role tabulation, and an academic rules engine for program-specific grading and GPA.",
@@ -543,29 +552,99 @@ export const leadership: string[] = [
   "Writes blog posts and records screencasts in his mother language to help others learn",
 ];
 
+export type Engagement = {
+  title: string;
+  period: string;
+  rating?: number;
+  // Tech/theme tags for the engagement.
+  tags: string[];
+};
+
+// Public Upwork work history. Earnings are private; these are the engagements
+// Upwork exposes publicly, ordered to show repeat hires and multi-year tenure.
+export const freelance = {
+  // Narrative summary synthesized from ~58 completed jobs, with the headline
+  // numbers woven in casually. Rendered as paragraphs.
+  summary: [
+    "I've freelanced on Upwork (back when it was called oDesk) since 2009 — 58 completed jobs, 2.9K+ hours logged, and a 4.7★ rating across 57 client reviews. It's where a lot of my career actually happened, working directly with founders and teams around the world.",
+    "Most of that work was backend. I built Python and Django REST Framework APIs powering mobile apps, an online sports-booking platform for a Portuguese startup, large-scale web crawlers, and a steady stream of email and web-automation systems. In my earlier years I shipped plenty of PHP, Laravel, CodeIgniter and WordPress work too — everything from custom plugins to full sites. More recently, clients increasingly bring me in as a polyglot code reviewer, auditing PHP, Python, Node.js, Go and Java codebases for quality and best practices.",
+    "What I'm proudest of is that clients keep coming back. One code-review engagement ran from 2014 all the way to 2017; the PEEMZ backend team rehired me across four separate contracts. The feedback has been consistent for over a decade — clear, well-documented, efficient code, delivered fast, with communication people can rely on. One client, after going through 30 developers in 12 years, said I was the one who 'withstood.'",
+  ],
+  engagements: [
+    { title: "Code Reviewer — PHP, Python, Node.js, Go & Java", period: "Jan 2021 – Jul 2021", rating: 5, tags: ["Code Review", "Polyglot"] },
+    { title: "Code Reviewer — Python / PHP", period: "Nov 2018 – Nov 2019", rating: 5, tags: ["Code Review"] },
+    { title: "PEEMZ — Backend, Python / Django", period: "Mar 2018 – Jul 2019", rating: 5, tags: ["Python", "Django"] },
+    { title: "Code Reviewer — Python / PHP", period: "May 2018 – Nov 2018", rating: 5, tags: ["Code Review"] },
+    { title: "Code Reviewer — Python / PHP", period: "Feb 2017 – Mar 2018", rating: 5, tags: ["Code Review"] },
+    { title: "PEEMZ — Backend Development, Python / Django", period: "Nov 2017 – Mar 2018", rating: 5, tags: ["Python", "Django"] },
+    { title: "PEEMZ — Python / Django REST API & Website", period: "May 2017 – Nov 2017", rating: 5, tags: ["Python", "DRF"] },
+    { title: "Python / Django / DRF — Mobile Backend", period: "Jul 2016 – May 2017", rating: 5, tags: ["Python", "DRF", "API"] },
+    { title: "REST API Development — Python / Django / DRF", period: "Jan 2017 – Mar 2017", rating: 5, tags: ["Python", "DRF", "API"] },
+    { title: "Code Reviewer — Python", period: "Sep 2014 – Feb 2017", rating: 5, tags: ["Code Review", "Long-term"] },
+  ] as Engagement[],
+};
+
 export type Testimonial = {
   quote: string;
   author: string;
   company: string;
+  rating?: number; // out of 5
+  date?: string;
+  source?: string; // e.g. "Upwork"
 };
 
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "I've worked with Abu in a big project for the past 10 months and I couldn't be happier with my hiring. This man is a great programmer and an excellent communicator. He is very intelligent and has a pragmatic approach to problem solving. He is ALWAYS available. I would definitely recommend him for anyone looking for an experienced web developer with great communication skills.",
-    author: "Andre Duarte",
-    company: "AirCourts",
+      "Provided great services and will use again in the future.",
+    author: "Verified Upwork Client",
+    company: "Code Reviewer · PHP, Python, Node.js, Go & Java",
+    rating: 5,
+    date: "Jul 2021",
+    source: "Upwork",
   },
   {
     quote:
-      "I could write pages and pages praising Masnun for his work and the help he provided to us! I am simply going to say to everyone, he is the best developer/consultant we have worked with on Odesk. Great guy, and we will be using him again in the future! RentersCard loves Masnun!",
+      "AMAZING JOB FROM MASNUN! His work still continues to impress our company! Professional and very reactive!",
+    author: "Verified Upwork Client",
+    company: "Backend Development · Python / Django",
+    rating: 5,
+    date: "Mar 2018",
+    source: "Upwork",
+  },
+  {
+    quote:
+      "Masnun is a fantastic support for anyone! He's a great person, very professional and respectful. I highly recommend him.",
+    author: "Verified Upwork Client",
+    company: "REST API · Python / Django / DRF",
+    rating: 5,
+    date: "Mar 2017",
+    source: "Upwork",
+  },
+  {
+    quote:
+      "I've worked with Abu in a big project for the past 10 months and I couldn't be happier with my hiring. This man is a great programmer and an excellent communicator. He is very intelligent and has a pragmatic approach to problem solving. He is ALWAYS available. I would definitely recommend him for anyone looking for an experienced web developer with great communication skills.",
+    author: "Andre Duarte",
+    company: "AirCourts",
+    rating: 5,
+    date: "Jun 2014",
+    source: "Upwork",
+  },
+  {
+    quote:
+      "I could write pages and pages praising Masnun for his work and the help he provided to us! I am simply going to say to everyone, he is the best developer/consultant we have worked with on oDesk. Great guy, and we will be using him again in the future! RentersCard loves Masnun!",
     author: "Ash Hoey",
     company: "RentersCard",
+    date: "Apr 2014",
+    source: "Upwork",
   },
   {
     quote:
       "Masnun was an exemplary contractor. He was communicative, clear, and took time to ensure that he understood the work properly. I work with Django / Python myself, and I was impressed with Masnun's code. He takes coding best practices seriously, and his code is clean and efficient.",
     author: "Patrick Brown",
     company: "Rouse Lawyers",
+    rating: 5,
+    date: "Oct 2012",
+    source: "Upwork",
   },
 ];

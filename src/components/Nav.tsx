@@ -1,23 +1,18 @@
 import { useEffect, useState } from "react";
 import { profile } from "../data.ts";
 
+// href is a full hash target: "#anchor" scrolls the home page,
+// "#/page" routes to a sub-page.
 const links = [
-  ["about", "About"],
-  ["projects", "Projects"],
-  ["oss", "Open Source"],
-  ["skills", "Skills"],
-  ["experience", "Experience"],
-  ["leadership", "Community"],
-  ["testimonials", "Testimonials"],
-  ["contact", "Contact"],
+  ["#about", "About"],
+  ["#/projects", "Projects"],
+  ["#/freelance", "Freelance"],
+  ["#/experience", "Experience"],
+  ["#testimonials", "Testimonials"],
+  ["#contact", "Contact"],
 ];
 
-type Props = {
-  theme: "dark" | "light";
-  onToggleTheme: () => void;
-};
-
-export function Nav({ theme, onToggleTheme }: Props) {
+export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -30,27 +25,20 @@ export function Nav({ theme, onToggleTheme }: Props) {
 
   return (
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
-      <a href="#top" className="nav__brand">
+      <a href="#/" className="nav__brand">
         {profile.name.split(" ").map((w) => w[0]).join("")}
         <span className="nav__brand-dot">.</span>
       </a>
 
       <nav className={`nav__links ${open ? "nav__links--open" : ""}`}>
-        {links.map(([id, label]) => (
-          <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>
+        {links.map(([href, label]) => (
+          <a key={href} href={href} onClick={() => setOpen(false)}>
             {label}
           </a>
         ))}
       </nav>
 
       <div className="nav__actions">
-        <button
-          className="nav__icon"
-          aria-label="Toggle color theme"
-          onClick={onToggleTheme}
-        >
-          {theme === "dark" ? "☀" : "☾"}
-        </button>
         <button
           className="nav__icon nav__burger"
           aria-label="Toggle menu"

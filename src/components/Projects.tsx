@@ -1,18 +1,16 @@
-import { motion } from "framer-motion";
 import { projects } from "../data.ts";
 
-export function Projects() {
+type Props = {
+  // When true, show only the homepage-featured subset.
+  featuredOnly?: boolean;
+};
+
+export function Projects({ featuredOnly = false }: Props) {
+  const list = featuredOnly ? projects.filter((p) => p.featured) : projects;
   return (
     <div className="cards">
-      {projects.map((p, i) => (
-        <motion.div
-          key={p.slug}
-          className="card project"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.45, delay: i * 0.05 }}
-        >
+      {list.map((p) => (
+        <div key={p.slug} className="card project">
           <h3 className="card__title">{p.name}</h3>
           <p className="card__note">{p.summary}</p>
           <div className="project__tags">
@@ -25,7 +23,7 @@ export function Projects() {
           <a className="project__more" href={`#/project/${p.slug}`}>
             View details →
           </a>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

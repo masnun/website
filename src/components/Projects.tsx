@@ -3,10 +3,15 @@ import { projects } from "../data.ts";
 type Props = {
   // When true, show only the homepage-featured subset.
   featuredOnly?: boolean;
+  // When set, show only projects whose tags intersect this list.
+  filterTags?: string[];
 };
 
-export function Projects({ featuredOnly = false }: Props) {
-  const list = featuredOnly ? projects.filter((p) => p.featured) : projects;
+export function Projects({ featuredOnly = false, filterTags }: Props) {
+  let list = featuredOnly ? projects.filter((p) => p.featured) : projects;
+  if (filterTags && filterTags.length) {
+    list = list.filter((p) => p.tags.some((t) => filterTags.includes(t)));
+  }
   return (
     <div className="cards">
       {list.map((p) => (

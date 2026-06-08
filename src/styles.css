@@ -493,6 +493,96 @@ h1, h2, h3 {
   text-decoration: none;
 }
 
+/* ---------- Skills (accordion) ---------- */
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 760px;
+}
+.skill-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.skill-item.is-open {
+  border-color: var(--accent);
+}
+.skill-item__head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  color: var(--text);
+  text-align: left;
+}
+.skill-item__name {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.skill-item__chevron {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.18s ease;
+}
+.skill-item.is-open .skill-item__chevron {
+  transform: rotate(90deg);
+}
+.skill-item__body {
+  padding: 0 20px 18px;
+}
+.skill-item__cta {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ---------- Filter pills (projects by skill) ---------- */
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.filter-pill {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+.filter-pill:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+.filter-pill--active {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.filter-pill--active:hover {
+  color: #fff;
+}
+.filter-status {
+  margin: -8px 0 20px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 /* ---------- Writing / blog ---------- */
 .writing__more {
   display: flex;

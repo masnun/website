@@ -24,6 +24,15 @@ import webhookConfigHub from "./content/webhook-config-hub.md?raw";
 import universityEms from "./content/university-ems.md?raw";
 import socialShoppingApi from "./content/social-shopping-api.md?raw";
 import mobileCommunityForum from "./content/mobile-community-forum.md?raw";
+import ecommerceSaas from "./content/ecommerce-saas.md?raw";
+import twoDealEbaySearch from "./content/2deal-ebay-search.md?raw";
+import animeplex from "./content/animeplex.md?raw";
+import deployninja from "./content/deployninja.md?raw";
+import endlessVideo from "./content/endless-video.md?raw";
+import kuestions from "./content/kuestions.md?raw";
+import kunstreminder from "./content/kunstreminder.md?raw";
+import rentPaymentSchedule from "./content/rent-payment-schedule.md?raw";
+import twBoost from "./content/twboost.md?raw";
 
 export const profile = {
   name: "Abu Ashraf Masnun",
@@ -42,6 +51,7 @@ export const profile = {
   email: "masnun@gmail.com",
   website: "masnun.com",
   github: "github.com/masnun",
+  linkedin: "https://www.linkedin.com/in/masnun",
   upwork: "https://www.upwork.com/freelancers/abuashrafmasnun",
   cv: "Abu Ashraf Masnun - CV.pdf",
   summary:
@@ -272,77 +282,67 @@ export const blogPosts: BlogCategory[] = [
 
 export type Skill = {
   name: string;
-  // 0–100, derived from the proficiency bars on the CV.
-  level: number;
+  // ≤5-sentence summary, grounded in the projects below.
   blurb: string;
+  // Project tags this skill covers — used to filter projects on the
+  // Projects page when the skill is clicked.
+  tags: string[];
 };
 
 export const skills: Skill[] = [
   {
-    name: "Python",
-    level: 95,
-    blurb:
-      "My most favorite language. Founded Python Bangladesh. Built apps, services and large email/SMS platforms with Django, DRF, Flask and Celery scaling to a million users daily. Wrote popular StackOverflow answers on asyncio.",
-  },
-  {
     name: "Go (Golang)",
-    level: 75,
     blurb:
-      "My second favorite. Love the concurrency primitives — easy to build concurrent systems. Prefer Chi for routing and sqlx over ORMs. Fast, reliable and scalable; my pick for large distributed systems.",
+      "My go-to for high-throughput, reliable distributed services. I've built SMS delivery engines, a caching API gateway, an SMTP email-verification service, an open-tracking pixel server and infrastructure watchdogs in Go. I lean on goroutines and channels for concurrency, Chi or Echo for routing, and sqlx over heavy ORMs. The simplicity, speed and predictable deploys are exactly what large systems need. It's my pick when something has to stay up under load.",
+    tags: ["Go", "Chi", "Echo", "Goroutines", "Asynq"],
   },
   {
     name: "Node.js / TypeScript",
-    level: 70,
     blurb:
-      "Started on the MEAN stack, now favor Koa for its light weight. Adopted TypeScript for the productivity gains of types. Moved background tasks from Kue to Bull.",
+      "My main stack for service APIs and data pipelines in recent years. I favor Koa for its lightweight middleware and BullMQ/Bull over Redis for background work, and I've adopted TypeScript across the board for the safety types bring. I've built job-aggregation services, a central analytics pipeline into Snowflake, scraping fleets and a five-year real-time analytics backend with it. Clean, layered architectures are a recurring theme in this work. It scales well across a team.",
+    tags: ["Node.js", "TypeScript", "Koa", "BullMQ", "Bull", "JavaScript"],
+  },
+  {
+    name: "Python",
+    blurb:
+      "My first-choice language and the one I've shipped the most production code in. I've built large email and SMS platforms, REST APIs, self-scaling worker systems and a nine-year university results system with Django, DRF, Flask and Celery. I know its concurrency model deeply — asyncio, the event loop and the GIL — and have written widely-read posts on it. I co-founded Python Bangladesh, the country's largest Python community. It's where I'm fastest and most opinionated.",
+    tags: ["Python", "Django", "DRF", "Flask", "Celery", "RQ"],
   },
   {
     name: "PHP",
-    level: 72,
     blurb:
-      "7+ years in my early days — Laravel, Symfony2, CodeIgniter, WordPress, Silverstripe. I respect what PHP brought to the web but actively avoid it today.",
+      "Where my career began — I shipped professional PHP from 2008 onward. I built Q&A platforms, deployment tooling, e-commerce search, concert and rent-management apps, and community sites on Zend Framework, Yii and WordPress. I moderated phpXperts, the largest PHP group in Bangladesh, and spoke at its conferences. I respect what PHP taught me about the web, even though I reach for other tools today. It's still a language I can move fast in.",
+    tags: ["PHP", "Zend Framework", "Yii Framework", "WordPress"],
   },
   {
-    name: "Javascript (Front End)",
-    level: 70,
+    name: "Distributed Systems & Background Jobs",
     blurb:
-      "jQuery → AngularJS → React. Comfortable building SPAs and plain-old-JS. A backend dev at heart who works full stack.",
+      "The throughline of most of my work: reliable systems built from queues, workers and services. I've designed self-scaling worker fleets, exactly-once data pipelines, multi-provider delivery with failover, and a background-worker framework from scratch. I've used Celery, BullMQ, Asynq, Gearman and RQ to move heavy work off the request path safely. The hard parts — backpressure, idempotency, failure recovery, graceful shutdown — are the parts I enjoy most. This is where I do my best engineering.",
+    tags: ["Asynq", "BullMQ", "Bull", "Celery", "Gearman", "RQ", "IronMQ", "Snowflake"],
   },
   {
-    name: "Version Control / Git",
-    level: 78,
+    name: "Databases & Caching",
     blurb:
-      "Started on SVN, lived in Git most of my career. Familiar with modern Git usage and Git flow.",
+      "I've run MySQL, PostgreSQL, MongoDB, Redis and Elasticsearch in production across many systems. I use the right store per job — relational for transactional data, documents for flexible and analytics data, Redis for caching, queues and locks. I've done schema design, query profiling and cache-aside layers with sensible invalidation. Keeping data correct and fast under concurrent writes is a problem I've solved repeatedly. Redis in particular shows up almost everywhere I build.",
+    tags: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Elasticsearch", "Caching"],
   },
   {
-    name: "SysAdmin / Cloud / DevOps",
-    level: 68,
+    name: "Cloud, DevOps & IaC",
     blurb:
-      "Setting up and managing Linux servers for years — LAMP and nginx with Python/Node, Varnish, HAProxy. AWS / Rackspace / Azure. Chef / Ansible automation.",
+      "I deploy and operate what I build. I've provisioned full AWS environments as Terraform code — VPC, ECS, RDS, S3, EFS, secrets and scheduled jobs — and run services on Docker with CI, process managers and serverless Lambda. Years of Linux sysadmin back it up: nginx, uWSGI, Daphne and Supervisord. Observability matters to me, so Sentry, structured logging and Slack alerting come standard. The goal is always reproducible, boring, reliable infrastructure.",
+    tags: ["AWS", "AWS Lambda", "Terraform", "Docker", "Supervisord"],
   },
   {
-    name: "NoSQL",
-    level: 60,
+    name: "Web Scraping & Automation",
     blurb:
-      "MongoDB and Redis in production; played with RethinkDB. Used Redis for caching, message queueing and storage.",
+      "I've built large-scale scraping and automation systems end to end. That includes a distributed crawl engine that grew to 750+ employer scrapers with headless browsers, an automated anime aggregator, and a Twitter keyword-and-reply automation engine. I handle the messy parts — concurrency and locking, per-source quirks, bot-like patterns and rate limits. Turning unstructured web content into clean structured data is something I've done many times. It pairs naturally with my queue-and-worker background.",
+    tags: ["Puppeteer", "PHP Simple HTML DOM", "Twitter APIs"],
   },
   {
-    name: "Business Analysis / Growth",
-    level: 65,
+    name: "Frontend (React)",
     blurb:
-      "Graduation and masters in business. Co-founder of Google Business Group Khulna. Worked as product co-ordinator translating business needs to engineering.",
-  },
-  {
-    name: "Docker / Vagrant / VMs",
-    level: 35,
-    blurb:
-      "Vagrant for local env setup, Docker when needed, plus experience with Bitnami stacks.",
-  },
-  {
-    name: "UI / UX / Design",
-    level: 20,
-    blurb:
-      "Honest about this one — I can reuse Bootstrap and themes to make things work, but I'm no designer.",
+      "A backend engineer at heart who works comfortably across the stack. I've led React/Redux dashboards for real-time analytics and scraping tools, built management UIs, and shipped a full Next.js storefront app. My front-end history runs jQuery → AngularJS → React, so I've watched the patterns evolve. I'm not a designer, but I build clean, functional interfaces that make systems usable. Owning both halves means the API and the UI get designed together.",
+    tags: ["React", "Redux", "Next.js", "jQuery", "Bootstrap"],
   },
 ];
 
@@ -459,6 +459,17 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "ecommerce-saas",
+    featured: true,
+    name: "Shopify Like E-Commerce SaaS",
+    summary:
+      "A multi-tenant, Shopify-like e-commerce SaaS — full-stack Next.js app, a sandboxed theme engine that safely runs untrusted storefront code, its own theme build/deploy pipeline, and the AWS infrastructure-as-code that runs it all.",
+    details:
+      "A multi-tenant e-commerce SaaS where any merchant can launch their own online store — catalog, multi-location inventory, shipping, payments, blogging, custom domains and fully custom storefront themes. I worked across the whole system: a full-stack TypeScript/Next.js application with strict tenant isolation and role-based access; a theme engine that executes arbitrary merchant theme code inside a hardened server-side sandbox with cached compiled views; a decoupled CLI build-and-deploy pipeline that compiles themes, assigns stable IDs for idempotent deploys, and ships them across a network-isolation boundary with retried, fault-tolerant syncing; and the reproducible AWS infrastructure (Terraform: VPC, ECS, RDS, S3, EFS, secrets, scheduled jobs) that provisions and runs the platform.",
+    markdown: ecommerceSaas,
+    tags: ["TypeScript", "Next.js", "React", "PostgreSQL", "MongoDB", "Redis", "Terraform", "AWS"],
+  },
   {
     slug: "sms-delivery-platform",
     featured: true,
@@ -696,6 +707,86 @@ export const projects: Project[] = [
     tags: ["PHP", "MySQL", "Early Work"],
     link: "https://github.com/masnun/J21v5",
   },
+  {
+    slug: "2deal-ebay-search",
+    name: "2Deal — eBay Product Search",
+    summary:
+      "A German shopping site for quickly searching eBay products and picking one to buy, with enriched product info and related items. I solo-ported the existing application onto the Zend Framework.",
+    details:
+      "2Deal.de is a German shopping site that lets people quickly search products on eBay and pick one to purchase, wrapping the listings with extra product information and relevant related products so customers can browse with less friction. I joined to port the existing application onto the Zend Framework — and was the sole developer, handling every task the migration required: the MVC restructure, MySQL data access, the eBay-backed search and product pages, and the jQuery front-end behavior.",
+    markdown: twoDealEbaySearch,
+    tags: ["PHP", "Zend Framework", "MySQL", "jQuery"],
+  },
+  {
+    slug: "animeplex",
+    name: "Animeplex — Automated Anime Aggregator",
+    summary:
+      "An automated WordPress site that gathers and displays the latest anime videos. I built the scraping layer that pulls from a set of predefined sources and presents them nicely on the site.",
+    details:
+      "Animeplex is an automated website that gathers and displays the latest anime videos with no manual curation. My job was the scraping and presentation layer: using PHP with PHP Simple HTML DOM (and XML feeds where available), I parsed a set of predefined anime sources, extracted the videos and their metadata, pushed them into the WordPress site, and presented them cleanly on the front end with JavaScript and jQuery — a hands-off pipeline that keeps the site fresh with the newest anime automatically.",
+    markdown: animeplex,
+    tags: ["PHP", "WordPress", "MySQL", "PHP Simple HTML DOM", "jQuery"],
+  },
+  {
+    slug: "deployninja",
+    name: "Deployninja — Painless Repo Deployment",
+    summary:
+      "A tool to deploy SVN and Git repositories to your web server painlessly. As backend engineer I built all the algorithms that fetch the repositories and upload them to the servers.",
+    details:
+      "Deployninja (built at Leevio) lets you deploy your SVN and Git repositories to your web server in a painless fashion. I worked on it as a backend engineer and built all the algorithms that fetch the repositories and upload them to the servers — the core of the product. The fetch-and-deploy engine talks to SVN (php-svn) and Git (GitPython) repos and transfers code to the target servers, running asynchronously: jobs are dispatched to Gearman and processed by background workers supervised by Supervisord, with PHP/Zend Framework on the application side and Python handling parts of the repository and deployment work.",
+    markdown: deployninja,
+    tags: ["PHP", "Zend Framework", "Python", "Gearman", "Supervisord", "MySQL"],
+  },
+  {
+    slug: "endless-video",
+    name: "Endless Video — Refactor & Optimization",
+    summary:
+      "An existing video application I refactored and optimized — fixing bugs, adding new features and boosting performance on a live codebase.",
+    details:
+      "Endless Video was an existing video application I came onto to make better and faster. I refactored and optimized the codebase, fixed existing bugs, added new features, and boosted the application's performance — maintenance-and-improvement engineering on a live product built in PHP on the Yii Framework with a MySQL backend and a Flash-based video layer with JavaScript on the front end.",
+    markdown: endlessVideo,
+    tags: ["PHP", "Yii Framework", "MySQL", "Flash", "JavaScript"],
+  },
+  {
+    slug: "kuestions",
+    name: "Kuestions — Q&A Platform",
+    summary:
+      "A StackOverflow-like Q&A platform. I built the user login and social-network integration, worked on the question display and answering system, and contributed to the database architecture, sysadmin and DB profiling.",
+    details:
+      "Kuestions is a StackOverflow-like question-and-answer platform. My main responsibility was the user login system and social-network integration, after which I worked on the question display and answering system — the heart of the product. I also contributed to the database architecture and did some system administration and database profiling to find and smooth out slow queries. Built in PHP on the Zend Framework with a MySQL backend and a jQuery front end.",
+    markdown: kuestions,
+    tags: ["PHP", "Zend Framework", "MySQL", "jQuery"],
+  },
+  {
+    slug: "kunstreminder",
+    name: "Kunstreminder — Concert Listings & Alerts",
+    summary:
+      "A concert-listing app where people follow their favorite musicians and music and get notified about events featuring them.",
+    details:
+      "Kunstreminder is a concert-listing application. People follow their favorite musicians and music, and the app notifies them about events where those artists or that music will be available. I worked on building the listings, the follow relationships between users and artists/music, and the notification flow that ties a user's follows to relevant upcoming events. Built in PHP on the Zend Framework with a MySQL backend and a jQuery front end.",
+    markdown: kunstreminder,
+    tags: ["PHP", "Zend Framework", "MySQL", "jQuery"],
+  },
+  {
+    slug: "rent-payment-schedule",
+    name: "Rent Payment Schedule",
+    summary:
+      "A web app to calculate and print rent payment schedules and pay rent online, with separate user and admin control panels.",
+    details:
+      "Rent Payment Schedule is a web app that lets people calculate and print their rent payment schedules, and even pay their rent online. It includes both a user control panel and an admin control panel for better management. I worked on building the schedule calculation and printable output, the online payment flow, and the two management surfaces. Built in PHP on the Zend Framework with a MySQL backend.",
+    markdown: rentPaymentSchedule,
+    tags: ["PHP", "Zend Framework", "MySQL"],
+  },
+  {
+    slug: "twboost",
+    name: "TwBoost — Twitter Automation Engine",
+    summary:
+      "A Twitter automation engine: define keywords and an auto-reply, and it periodically searches Twitter and posts replies at random intervals. Built on the Twitter APIs.",
+    details:
+      "TwBoost is a Twitter automation engine. A user defines a set of keywords and an automated reply message; the engine periodically searches Twitter for those keywords and posts the replies at random intervals so the automation feels organic. Built on the Twitter APIs, I implemented the keyword-search loop, the periodic scheduling, and the randomized-interval reply logic. Built in PHP with a MySQL backend and a jQuery + Twitter Bootstrap front end.",
+    markdown: twBoost,
+    tags: ["PHP", "Twitter APIs", "MySQL", "jQuery", "Bootstrap"],
+  },
 ];
 
 export type OssProject = {
@@ -880,5 +971,11 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     date: "Oct 2012",
     source: "Upwork",
+  },
+  {
+    quote:
+      "I worked with Abu Ashraf Masnun in various projects and he's one of the good programmers I really like working with. He has passion for programming and open-source. When I was working with him there isn't a problem he has not solved, and that's what I really like about him. He's creative and smart in solving problems. I highly recommend him :)",
+    author: "Penn Bulaqueña",
+    company: "Client",
   },
 ];

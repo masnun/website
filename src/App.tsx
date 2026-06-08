@@ -40,7 +40,10 @@ export default function App() {
     }
   }, [route]);
 
-  const projectMatch = route.match(/^\/project\/(.+)$/);
+  // Path without any query string (e.g. "/projects?skill=Go" -> "/projects").
+  const path = route.split("?")[0];
+
+  const projectMatch = path.match(/^\/project\/(.+)$/);
   const activeProject = projectMatch
     ? projects.find((p) => p.slug === projectMatch[1])
     : undefined;
@@ -52,14 +55,14 @@ export default function App() {
         <ProjectDetail project={activeProject} />
       </main>
     );
-  } else if (route === "/projects") {
+  } else if (path === "/projects") {
     content = (
       <main>
         <PageHead kicker="What I've built" title="Projects" />
         <ProjectsPage />
       </main>
     );
-  } else if (route === "/experience") {
+  } else if (path === "/experience") {
     content = (
       <main>
         <PageHead kicker="Career & craft" title="Experience" />
@@ -99,14 +102,14 @@ export default function App() {
         </Section>
       </main>
     );
-  } else if (route === "/about") {
+  } else if (path === "/about") {
     content = (
       <main>
         <PageHead kicker="Who I am" title="About Me" />
         <AboutPage />
       </main>
     );
-  } else if (route === "/writing") {
+  } else if (path === "/writing") {
     content = (
       <main>
         <PageHead kicker="In-depth technical posts" title="Writing" />
@@ -115,7 +118,7 @@ export default function App() {
         </Section>
       </main>
     );
-  } else if (route === "/testimonials") {
+  } else if (path === "/testimonials") {
     content = (
       <main>
         <PageHead kicker="What people say" title="Testimonials" />

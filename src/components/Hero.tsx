@@ -31,6 +31,9 @@ export function Hero() {
         <a href={`https://${profile.github}`} target="_blank" rel="noreferrer">
           {profile.github}
         </a>
+        <a href={profile.linkedin} target="_blank" rel="noreferrer">
+          LinkedIn
+        </a>
         <a href={profile.upwork} target="_blank" rel="noreferrer">
           Upwork · 4.7★ (57 reviews)
         </a>

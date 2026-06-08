@@ -3,6 +3,20 @@ import { useEffect, useState } from "react";
 import { profile } from "../data.ts";
 import { useHashRoute } from "../hooks/useHashRoute.ts";
 
+const LayersIcon = (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 2 2 7l10 5 10-5zM2 12l10 5 10-5-1.9-.95L12 14.85 3.9 11.05zM2 17l10 5 10-5-1.9-.95L12 19.85 3.9 15.05z" />
+  </svg>
+);
+
+const UserStarIcon = (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <circle cx="9" cy="7" r="4" />
+    <path d="M9 13c-3.87 0-7 2.24-7 5v2h9.5a6.5 6.5 0 0 1-.5-2.5c0-1.86.78-3.54 2.04-4.73A13.4 13.4 0 0 0 9 13z" />
+    <path d="M17.5 12l1.32 2.67 2.95.43-2.13 2.08.5 2.94-2.64-1.39-2.64 1.39.5-2.94-2.13-2.08 2.95-.43z" />
+  </svg>
+);
+
 const icon = (d: string): ReactNode => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d={d} />
@@ -27,7 +41,7 @@ const links: [string, string, ReactNode][] = [
       "M10 2a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4V4a2 2 0 0 0-2-2h-4zm0 2h4v2h-4V4z"
     ),
   ],
-  ["#/projects", "Projects", icon("M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z")],
+  ["#/projects", "Projects", LayersIcon],
   [
     "#/writing",
     "Writing",
@@ -35,13 +49,7 @@ const links: [string, string, ReactNode][] = [
       "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
     ),
   ],
-  [
-    "#/testimonials",
-    "Testimonials",
-    icon(
-      "M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"
-    ),
-  ],
+  ["#/testimonials", "Testimonials", UserStarIcon],
 ];
 
 export function Nav() {
@@ -62,7 +70,6 @@ export function Nav() {
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
       <a href="#/" className="nav__brand">
         {profile.name.split(" ").map((w) => w[0]).join("")}
-        <span className="nav__brand-dot">.</span>
       </a>
 
       <nav className={`nav__links ${open ? "nav__links--open" : ""}`}>
@@ -78,7 +85,7 @@ export function Nav() {
               onClick={() => setOpen(false)}
             >
               {ico}
-              {label}
+              <span className="nav__label">{label}</span>
             </a>
           );
         })}

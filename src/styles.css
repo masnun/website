@@ -68,6 +68,13 @@ h1, h2, h3 {
   font-size: 1.15rem;
   letter-spacing: 0.5px;
   color: var(--text);
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: 0 6px 24px -12px rgba(20, 20, 40, 0.25);
 }
 .nav__brand:hover {
   text-decoration: none;
@@ -1076,20 +1083,43 @@ h1, h2, h3 {
   .nav__burger {
     display: grid;
   }
+  /* Closed: keep the pill beside the hamburger, but icon-only + scrollable. */
   .nav__links {
+    gap: 2px;
+    padding: 4px;
+    max-width: 58vw;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav__links::-webkit-scrollbar {
+    display: none;
+  }
+  .nav__links a {
+    padding: 8px 11px;
+  }
+  .nav__links .nav__label {
+    display: none;
+  }
+  /* Open: full labeled dropdown panel. */
+  .nav__links--open {
     position: fixed;
     top: 60px;
     right: 16px;
     left: 16px;
     flex-direction: column;
+    align-items: stretch;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 18px;
-    gap: 16px;
-    display: none;
+    padding: 14px;
+    gap: 6px;
+    max-width: none;
+    overflow: visible;
   }
-  .nav__links--open {
-    display: flex;
+  .nav__links--open a {
+    padding: 10px 14px;
+  }
+  .nav__links--open .nav__label {
+    display: inline;
   }
 }

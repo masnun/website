@@ -149,7 +149,7 @@ export default function App() {
               </a>
               <a className="seg__btn" href="#/projects">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z" />
+                  <path d="M12 2 2 7l10 5 10-5zM2 12l10 5 10-5-1.9-.95L12 14.85 3.9 11.05zM2 17l10 5 10-5-1.9-.95L12 19.85 3.9 15.05z" />
                 </svg>
                 All Projects
               </a>

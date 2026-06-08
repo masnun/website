@@ -52,6 +52,7 @@ export const profile = {
   website: "masnun.com",
   github: "github.com/masnun",
   linkedin: "https://www.linkedin.com/in/masnun",
+  stackoverflow: "https://stackoverflow.com/users/301107/masnun",
   upwork: "https://www.upwork.com/freelancers/abuashrafmasnun",
   cv: "Abu Ashraf Masnun - CV.pdf",
   summary:

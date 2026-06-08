@@ -1,8 +1,24 @@
 import { testimonials } from "../data.ts";
 
-export function Testimonials({ limit }: { limit?: number }) {
-  const sorted = [...testimonials].sort((a, b) => b.quote.length - a.quote.length);
-  const shown = limit ? sorted.slice(0, limit) : sorted;
+export function Testimonials({
+  limit,
+  authors,
+}: {
+  limit?: number;
+  // When set, show only these authors, in the given order.
+  authors?: string[];
+}) {
+  let shown;
+  if (authors) {
+    shown = authors
+      .map((a) => testimonials.find((t) => t.author === a))
+      .filter((t): t is (typeof testimonials)[number] => Boolean(t));
+  } else {
+    const sorted = [...testimonials].sort(
+      (a, b) => b.quote.length - a.quote.length
+    );
+    shown = limit ? sorted.slice(0, limit) : sorted;
+  }
   return (
     <div className="quotes">
       {shown.map((t, i) => (

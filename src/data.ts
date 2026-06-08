@@ -36,7 +36,7 @@ import twBoost from "./content/twboost.md?raw";
 
 export const profile = {
   name: "Abu Ashraf Masnun",
-  tagline: "Distributed Systems · Python · Go · Node.js",
+  tagline: "Software Architecture · Distributed Systems · Go · Node.js · Python",
   // Rotating words for the animated hero headline.
   roles: [
     "Technical Architect",
@@ -55,7 +55,7 @@ export const profile = {
   upwork: "https://www.upwork.com/freelancers/abuashrafmasnun",
   cv: "Abu Ashraf Masnun - CV.pdf",
   summary:
-    "With 15+ years of professional experience, I build systems that scale to millions of users per month. I'm deeply focused on software architecture and system design, and over the years I've built high-scale distributed systems for clients across Python, Go, Node.js and PHP. I reach for boring, proven technology when the goal is to ship something that lasts, work the agile way, and do my best work on a team — sharing what I know and learning from everyone around me. Open source is close to my heart; in my spare time you'll usually find me on developer forums, helping others get unstuck.",
+    "Battle-tested experience building and scaling distributed systems has taught me what makes software last — and where it breaks. Today I pair that hard-won judgment with bleeding-edge AI tooling, combining human ingenuity and creativity with machine precision and speed. It lets me deliver fast without trading away code quality: I make the architectural calls, AI accelerates the execution, and deep instinct keeps the quality bar high. The craft stays human; the leverage is new.",
   // Longer narrative for the dedicated "About Me" page (#/about).
   // Rendered as paragraphs.
   about: [
@@ -277,6 +277,14 @@ export const blogPosts: BlogCategory[] = [
       },
     ],
   },
+];
+
+// Punchy, recruiter-facing numbers for the hero stats bar.
+export const heroStats: { value: string; label: string }[] = [
+  { value: "3.5M+", label: "Requests served / day" },
+  { value: "400K+", label: "Messages delivered / day" },
+  { value: "15+", label: "Years building software" },
+  { value: "100+", label: "Prod services shipped" },
 ];
 
 export type Skill = {

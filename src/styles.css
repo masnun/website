@@ -89,9 +89,16 @@ h1, h2, h3 {
   box-shadow: 0 6px 24px -12px rgba(20, 20, 40, 0.25);
 }
 .nav__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--muted);
   padding: 8px 16px;
   border-radius: 999px;
+}
+.nav__links a svg {
+  width: 15px;
+  height: 15px;
 }
 .nav__links a.is-active {
   color: #fff;
@@ -156,6 +163,32 @@ h1, h2, h3 {
   font-size: 1.05rem;
   margin-top: 14px;
   max-width: 60ch;
+}
+.hero__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 40px;
+}
+.hero__stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 32px;
+}
+.hero__stat {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.hero__stat-value {
+  font-weight: 700;
+  color: var(--text);
+}
+.hero__stat-label {
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 .hero__meta {
   display: flex;
@@ -986,6 +1019,43 @@ h1, h2, h3 {
 .section__more-wrap--left {
   margin-top: 32px;
   text-align: left;
+}
+.section__more-wrap--row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* Segmented continuous pills */
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.seg__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 26px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  white-space: nowrap;
+}
+.seg__btn:hover {
+  background: color-mix(in srgb, var(--accent) 88%, #000);
+  color: #fff;
+  text-decoration: none;
+}
+.seg__btn + .seg__btn {
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+.seg__btn svg {
+  width: 18px;
+  height: 18px;
 }
 .section__more-btn {
   font-size: 1rem;

@@ -3,6 +3,7 @@ import { Hero } from "./components/Hero.tsx";
 import { Nav } from "./components/Nav.tsx";
 import { Section } from "./components/Section.tsx";
 import { Skills } from "./components/Skills.tsx";
+import { Stats } from "./components/Stats.tsx";
 import { Projects } from "./components/Projects.tsx";
 import { ProjectsPage } from "./components/ProjectsPage.tsx";
 import { ProjectDetail } from "./components/ProjectDetail.tsx";
@@ -129,36 +130,34 @@ export default function App() {
         <Hero />
         <Section id="about" title="About Me" kicker="Who I am">
           <p className="prose">{profile.summary}</p>
+          <Stats />
           <div className="section__more-wrap section__more-wrap--left">
             <a className="btn btn--primary section__more-btn" href="#/about">
               More about me →
             </a>
           </div>
         </Section>
-        <Section id="projects" title="Featured Projects" kicker="What I've built">
+        <Section id="projects" title="Featured Work" kicker="What I've built">
           <Projects featuredOnly limit={4} />
           <div className="section__more-wrap">
-            <a className="btn btn--primary btn--round section__more-btn" href="#/projects">
-              See all {projects.length} projects →
-            </a>
-          </div>
-        </Section>
-        <Section id="writing" title="Writing" kicker="In-depth technical posts">
-          <p className="prose">
-            I write long-form technical posts on masnun.rocks and masnun.com —
-            less tutorial, more how things actually work under the hood. The
-            recurring themes: async and concurrency in Python, language
-            internals and design, Go and distributed systems, and building
-            real-time systems and clean REST APIs.
-          </p>
-          <div className="section__more-wrap section__more-wrap--left">
-            <a className="btn btn--primary section__more-btn" href="#/writing">
-              Read my writing →
-            </a>
+            <div className="seg">
+              <a className="seg__btn" href="#/experience">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M10 2a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4V4a2 2 0 0 0-2-2h-4zm0 2h4v2h-4V4z" />
+                </svg>
+                Work Experience
+              </a>
+              <a className="seg__btn" href="#/projects">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z" />
+                </svg>
+                All Projects
+              </a>
+            </div>
           </div>
         </Section>
         <Section id="testimonials" title="Testimonials" kicker="What people say">
-          <Testimonials limit={2} />
+          <Testimonials authors={["Patrick Brown", "Ash Hoey"]} />
           <div className="section__more-wrap section__more-wrap--left">
             <a className="btn btn--primary section__more-btn" href="#/testimonials">
               Read all testimonials →

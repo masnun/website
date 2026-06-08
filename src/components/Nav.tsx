@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import { profile } from "../data.ts";
 import { useHashRoute } from "../hooks/useHashRoute.ts";
 
 const LayersIcon = (
@@ -68,10 +67,6 @@ export function Nav() {
 
   return (
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
-      <a href="#/" className="nav__brand">
-        {profile.name.split(" ").map((w) => w[0]).join("")}
-      </a>
-
       <nav className={`nav__links ${open ? "nav__links--open" : ""}`}>
         {links.map(([href, label, ico]) => {
           const target = (href as string).replace(/^#/, "");

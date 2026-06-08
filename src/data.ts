@@ -21,6 +21,9 @@ import smtpEmailVerifier from "./content/smtp-email-verifier.md?raw";
 import campaignRoutingEngine from "./content/campaign-routing-engine.md?raw";
 import realtimeAnalyticsPlatform from "./content/realtime-analytics-platform.md?raw";
 import webhookConfigHub from "./content/webhook-config-hub.md?raw";
+import universityEms from "./content/university-ems.md?raw";
+import socialShoppingApi from "./content/social-shopping-api.md?raw";
+import mobileCommunityForum from "./content/mobile-community-forum.md?raw";
 
 export const profile = {
   name: "Abu Ashraf Masnun",
@@ -429,6 +432,105 @@ export const projects: Project[] = [
       "A multi-tenant webhook hub and configuration service in Go that sat at the edge of a nine-brand job-board network and did two jobs at once: serving each app its configuration (templates, subject pools, ad configs) and receiving the flood of delivery and engagement webhooks from email and SMS providers — classifying each event (hard/soft bounce, spam complaint, unsubscribe, plus SMS stop-word/more/help detection), enforcing a global blacklist, and routing events to the right downstream queues. Per-app config is served cache-aside from Redis via a custom cache layer that tracks its own keys for admin inspection and bulk invalidation; nine brand-specific route groups mount under one service; and stat events stream to the analytics platform through a CPU-sized goroutine pool so webhooks stay fast. I built it solo, end to end, over roughly four years (2017–2021) — the integration layer a messaging business lives or dies on.",
     markdown: webhookConfigHub,
     tags: ["Go", "Chi", "Redis", "MongoDB", "Webhooks"],
+  },
+  {
+    slug: "university-ems",
+    name: "University Exam & Result Management System",
+    summary:
+      "A Django exam/result management system I built solo for Khulna University's Business Administration Discipline and ran in production for 9 years — course registration, multi-role tabulation, and an academic rules engine for program-specific grading and GPA.",
+    details:
+      "A university examination and result management system I designed, built and maintained single-handedly for the Business Administration Discipline at Khulna University, kept in production from 2014 to 2023. It runs the full academic cycle: course registration (add/drop, credit limits, retakes, registration locks), component-based faculty mark entry, a multi-role tabulation workflow (instructor → scrutiny → tabulation) with result locks and audit logs, GPA computation on a 4.0 scale, print-ready mark sheets, and a faculty examination-payment tracker. The interesting part is the academic rules engine: BBA/MBA/EMBA/Executive MBA and their OBE variants each use different mark components (seven configurations), BBA retakes apply a points downgrade, and rules vary by cohort year — all encoded as concrete logic that drives real transcripts. Its nine-year production run for thousands of students is the achievement: sustained solo ownership of a complex, correctness-critical domain system.",
+    markdown: universityEms,
+    tags: ["Python", "Django", "MySQL", "Education"],
+  },
+  {
+    slug: "social-shopping-api",
+    name: "Social Shopping App — REST API",
+    summary:
+      "A Django REST Framework backend for a social fashion-shopping app — boutiques, products, social gifting, group wish lists, follows and orders — with token auth supporting password, phone and social login. A solo 6-week MVP.",
+    details:
+      "A REST API backend for a social fashion-shopping mobile app: boutiques and products to discover, social gifting between friends, group 'birthday list' wish lists, follows, likes, messaging, and a commerce layer (orders, sales, reservations, exclusive offers). I built it solo over ~6 weeks in 2016 as a Django REST Framework server for a phone client — a broad consumer domain (two-dozen resources across catalog, social, gifting and commerce) exposed as a consistent CRUD API via DRF serializers, viewsets and routers, with stateless token authentication supporting three login modes through one API: username/password, phone-number, and social-network login. An honest early-stage MVP — a complete, working API across a genuinely wide feature surface, built quickly and cleanly to make the product concept real.",
+    markdown: socialShoppingApi,
+    tags: ["Python", "Django", "DRF", "MySQL"],
+  },
+  {
+    slug: "mobile-community-forum",
+    name: "Mobile Community Forum Platform",
+    summary:
+      "A complete mobile/WAP-era community platform I built from scratch in PHP — forums, private messaging, profiles, presence, search, moderation and homegrown anti-abuse. One of my earliest projects, rebuilt across five generations.",
+    details:
+      "A complete mobile community and forum platform built from scratch in PHP — one of my earliest real projects, rebuilt and refined across multiple generations (this is v5). A self-hosted social site for mobile/WAP-era phones where people signed up, posted in forums (boards, topics, posts, moderation), messaged each other through a full private-messaging inbox, kept public and extended profiles, saw who was online, and searched across posts, topics, users and messages — with an owner control panel to run the community and homegrown anti-abuse (text CAPTCHA, banned user-agent handling, a 'shielded login' gate). I wrote every page, the database, and the moderation tools myself. I include it because it's where I come from: a young, self-taught developer building an entire multi-user web application end to end because he wanted to — and people actually used it.",
+    markdown: mobileCommunityForum,
+    tags: ["PHP", "MySQL", "Early Work"],
+    link: "https://github.com/masnun/J21v5",
+  },
+];
+
+export type OssProject = {
+  name: string;
+  // One-line description shown on the OSS card.
+  summary: string;
+  // External GitHub URL.
+  link: string;
+  tags: string[];
+};
+
+// Small open-source projects / libraries — link straight to GitHub, no detail page.
+export const ossProjects: OssProject[] = [
+  {
+    name: "PHPTube",
+    summary:
+      "A PHP library that extracts direct YouTube video URIs — in multiple formats — straight from a watch URL.",
+    link: "https://github.com/masnun/phptube",
+    tags: ["PHP", "Library", "Composer"],
+  },
+  {
+    name: "Avro Phonetic WP Plugin",
+    summary:
+      "A WordPress plugin that brings Avro Phonetic Bangla typing to any input — type Bengali phonetically, right in the browser.",
+    link: "https://github.com/masnun/avro-phonetic-wp-plugin",
+    tags: ["PHP", "WordPress", "Bangla"],
+  },
+  {
+    name: "PHAR Maker",
+    summary:
+      "A small CLI tool that packages a directory of PHP source into a distributable PHAR archive, with CLI and web entry points.",
+    link: "https://github.com/masnun/pharmaker",
+    tags: ["PHP", "CLI", "Tooling"],
+  },
+  {
+    name: "Super Poster",
+    summary:
+      "A browser-based tool to post to multiple Facebook groups at once, built on the Facebook JavaScript SDK.",
+    link: "https://github.com/masnun/super-poster",
+    tags: ["JavaScript", "Facebook API"],
+  },
+  {
+    name: "Facebook Profile Photo Generator",
+    summary:
+      "A Django app that overlays a custom badge onto a user's Facebook profile photo via Facebook OAuth.",
+    link: "https://github.com/masnun/facebook-profile-photo-generator",
+    tags: ["Python", "Django", "Facebook OAuth"],
+  },
+  {
+    name: "Django ORM Standalone",
+    summary:
+      "A starter that lets you use Django's ORM on its own — outside a full Django project — for scripts and small tools.",
+    link: "https://github.com/masnun/django-orm-standalone",
+    tags: ["Python", "Django ORM"],
+  },
+  {
+    name: "FTP Server Monitor",
+    summary:
+      "An Android app that monitors the status of an FTP server from your phone.",
+    link: "https://github.com/masnun/ftp_server_monitor",
+    tags: ["Android", "Java", "Gradle"],
+  },
+  {
+    name: "ExTorrent",
+    summary: "A torrent search/utility tool.",
+    link: "https://github.com/masnun/extorrent",
+    tags: ["OSS"],
   },
 ];
 

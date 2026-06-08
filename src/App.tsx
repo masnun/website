@@ -4,6 +4,7 @@ import { Nav } from "./components/Nav.tsx";
 import { Section } from "./components/Section.tsx";
 import { Skills } from "./components/Skills.tsx";
 import { Projects } from "./components/Projects.tsx";
+import { OssProjects } from "./components/OssProjects.tsx";
 import { ProjectDetail } from "./components/ProjectDetail.tsx";
 import { Timeline } from "./components/Timeline.tsx";
 import { Explored } from "./components/Explored.tsx";
@@ -47,6 +48,9 @@ export default function App() {
         <Hero />
         <Section id="projects" title="Projects" kicker="What I've built">
           <Projects />
+        </Section>
+        <Section id="oss" title="Open Source" kicker="Side projects & libraries">
+          <OssProjects />
         </Section>
         <Section id="about" title="Summary" kicker="Who I am">
           <p className="prose">{profile.summary}</p>

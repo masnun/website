@@ -4,6 +4,7 @@ import { profile } from "../data.ts";
 const links = [
   ["about", "About"],
   ["projects", "Projects"],
+  ["oss", "Open Source"],
   ["skills", "Skills"],
   ["experience", "Experience"],
   ["leadership", "Community"],

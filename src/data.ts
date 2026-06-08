@@ -11,6 +11,16 @@ import logoService from "./content/logo-service.md?raw";
 import textMessagingPlatform from "./content/text-messaging-platform.md?raw";
 import emailJobAlertPlatform from "./content/email-job-alert-platform.md?raw";
 import jobScrapingService from "./content/job-scraping-service.md?raw";
+import leadDistributionRouter from "./content/lead-distribution-router.md?raw";
+import workerMonitoringService from "./content/worker-monitoring-service.md?raw";
+import infrastructureHealthMonitor from "./content/infrastructure-health-monitor.md?raw";
+import pixelTrackingService from "./content/pixel-tracking-service.md?raw";
+import blockchainFromScratch from "./content/blockchain-from-scratch.md?raw";
+import customWorkerFramework from "./content/custom-worker-framework.md?raw";
+import smtpEmailVerifier from "./content/smtp-email-verifier.md?raw";
+import campaignRoutingEngine from "./content/campaign-routing-engine.md?raw";
+import realtimeAnalyticsPlatform from "./content/realtime-analytics-platform.md?raw";
+import webhookConfigHub from "./content/webhook-config-hub.md?raw";
 
 export const profile = {
   name: "Abu Ashraf Masnun",
@@ -321,12 +331,104 @@ export const projects: Project[] = [
     tags: ["Node.js", "Puppeteer", "Bull", "Redis", "MongoDB", "React"],
   },
   {
-    slug: "realtime-chat-conferencing",
-    name: "Realtime Chat & Conferencing",
-    summary: "Realtime chat over WebSocket and experimental WebRTC video.",
+    slug: "lead-distribution-router",
+    name: "Lead Distribution Router",
+    summary:
+      "Real-time router that fans every incoming lead out to multiple consumers at once — enriching with email verification, timezone and job-title normalization, with validate-then-failover delivery so a lead is never dropped. Built first in Python, then rewritten in TypeScript/Koa.",
     details:
-      "Built a realtime chat system over WebSocket with presence and message fan-out, then went further with an experimental WebRTC video conferencing setup — handling signaling, peer negotiation and media streams between participants.",
-    tags: ["WebSocket", "WebRTC", "Node.js"],
+      "A real-time lead distribution router — the hub that fans every incoming lead out to all the systems that need it the instant it arrives. A lead comes in through one API; the service verifies its email deliverability, resolves its timezone from its ZIP code, normalizes the searched job title against a canonical taxonomy, decides where it belongs based on source and target market, and dispatches it simultaneously to a primary consumer, the SMS platform and a search index. Every dispatch validates the downstream's response (status and well-formed body) and falls back to a durable backup queue on any failure, so a lead is never lost. I built it solo twice — first in Python (Flask + Celery), which I ran in production, then rewrote it in Node.js + TypeScript (Koa + Redis-backed Bull queues) for a cleaner, more responsive architecture — with graceful shutdown, queue hygiene and full observability. It's the connective tissue between several other systems in this portfolio.",
+    markdown: leadDistributionRouter,
+    tags: ["Python", "TypeScript", "Node.js", "Celery", "Koa", "MongoDB"],
+  },
+  {
+    slug: "worker-monitoring-service",
+    name: "Worker Monitoring & Background Jobs",
+    summary:
+      "Team-built Celery utility service. My part: a worker-health monitoring subsystem that watches the platform's other worker fleets and fires Slack down/recovery alerts — plus the Celery foundation, observability and stats processing.",
+    details:
+      "A shared background-jobs and worker-monitoring service — a Celery-based utility that ran miscellaneous scheduled tasks for a job-board business and watched over the platform's other background-worker fleets. It's a team project; my main contribution was the health-monitoring and alerting subsystem. Several services ran their own Celery worker pools (the SMS platform, the engagement tracker, others) that could silently die unnoticed; I built monitoring that periodically inspects each fleet's live worker status, detects when workers are missing or unresponsive (iterating on the detection to cut false positives), and posts down-and-recovery alerts to Slack so the team learns of outages in real time. I also set up the Celery foundation, signal handlers and task routing, wired in Sentry and New Relic, and built then optimized the stats-handling pipeline. The miscellaneous business tasks were largely built by a collaborator.",
+    markdown: workerMonitoringService,
+    tags: ["Python", "Celery", "Redis", "Flower", "Slack", "MongoDB"],
+  },
+  {
+    slug: "infrastructure-health-monitor",
+    name: "Infrastructure Health Monitor",
+    summary:
+      "A solo Go watchdog for a whole microservices platform — uptime checks across services, cache-memory monitoring, state-aware Slack alerts (no fatigue), and automatic cache-flush self-healing.",
+    details:
+      "A lean infrastructure health monitor and auto-remediation service in Go that watched over an entire microservices platform. On short intervals it health-checks every internal service and inspects the memory of the platform's Redis/ElastiCache clusters. When a service goes down it posts a Slack alert — exactly once per incident, with a recovery notice when it returns — by tracking each service's down/up state in Redis to avoid alert fatigue. For cache memory, it goes further than alerting: when usage crosses a threshold it automatically flushes the cache and re-checks, resolving the most common failure mode without paging anyone. Built solo with config-driven targets, coordinated goroutines and graceful shutdown — a small, sharp service that was the always-on safety net under everything else.",
+    markdown: infrastructureHealthMonitor,
+    tags: ["Go", "Chi", "Redis", "Slack", "Cron"],
+  },
+  {
+    slug: "pixel-tracking-service",
+    name: "Email Open-Tracking Pixel Service",
+    summary:
+      "High-throughput Go service serving the 1x1 open-tracking pixel in marketing emails — returns the pixel instantly and records the open asynchronously via goroutines + a buffered-channel worker. Multi-tenant across several email brands.",
+    details:
+      "A high-performance email open-tracking service in Go. It serves the invisible 1x1 pixel embedded in marketing emails: when a recipient opens a message their client loads the pixel, and this service records the open — IP, user agent, timestamp, campaign metadata, email domain — then routes it to a message queue for the engagement pipeline and a search store for analytics. The design is built for high volume at low latency: the HTTP handler returns the pixel from memory immediately (loaded once at startup, no per-request disk I/O) and does all real work asynchronously on a goroutine, pushing events onto a buffered channel that a single worker drains sequentially — absorbing bursts, bounding concurrency without locks, and isolating downstream failures from the pixel response. Multi-tenant across several email brands via hostname routing. Built solo; it's the open-tracking counterpart to the click/redirect engagement tracker.",
+    markdown: pixelTrackingService,
+    tags: ["Go", "Echo", "Goroutines", "Elasticsearch", "IronMQ"],
+  },
+  {
+    slug: "blockchain-from-scratch",
+    name: "Blockchain From Scratch (Go)",
+    summary:
+      "A from-scratch minimal blockchain in Go — cryptographically SHA-256-linked blocks with a genesis block, exposed via a small REST API. An honest one-day learning exercise in the fundamentals.",
+    details:
+      "A from-scratch minimal blockchain built in Go to understand how blockchains work under the hood. I implemented the core data structure myself: a chain of blocks where each holds its data, timestamp, the previous block's hash and its own SHA-256 hash — so every block is cryptographically chained to its predecessor (the tamper-evident property), bootstrapped from a genesis block, and exposed through a small Chi REST API to add and view blocks. It's an honest learning exercise — built in a day in early 2018, in-memory, no proof-of-work or consensus — kept deliberately tight so the cryptographic-linking idea stayed front and center. It reflects how I like to learn: build the smallest real version of a thing to see how it ticks.",
+    markdown: blockchainFromScratch,
+    tags: ["Go", "Chi", "SHA-256", "Learning"],
+  },
+  {
+    slug: "custom-worker-framework",
+    name: "Custom Background-Worker Framework",
+    summary:
+      "A Python background-worker framework I designed from scratch — worker-as-plugin base class, lazy dependency injection, centralized error handling, CLI + daemon execution and graceful shutdown — plus the lead/email/SMS pipeline (20+ jobs) built on it.",
+    details:
+      "A background-worker framework I built from scratch in Python, and the production lead-processing app that ran on it, powering a job board's email and SMS pipelines for ~2 years (2015–2017). The framework treats a worker as a plugin: every job subclasses one Worker base class and implements run(), and gets everything else for free — dependency injection with lazily-initialized database/queue/Slack clients, centralized error handling (traceback + unique ID to central logging, color-coded Slack alerts, opt-in recovery hooks), two execution modes through one code path (CLI for cron, and a daemon listening on Redis pub/sub that dispatches into a per-task thread pool), and graceful shutdown that drains in-flight work. Adding a job was near-zero boilerplate; ~20 production workers were built this way. On top ran a full lead-qualification pipeline — onboarding, daily job-alert email & SMS, engagement webhooks, and a lead-lifecycle state machine. The distinctive part isn't using a framework but designing one: separating framework concerns from application concerns, with deliberate calls on DI, lifecycle, failure recovery and observability.",
+    markdown: customWorkerFramework,
+    tags: ["Python", "Flask", "Redis", "RQ", "MongoDB", "Framework Design"],
+  },
+  {
+    slug: "smtp-email-verifier",
+    name: "SMTP Email Verification Service",
+    summary:
+      "A Go microservice that verifies email deliverability at the protocol level — syntax, MX lookup, and a live SMTP MAIL/RCPT handshake against the recipient's mail server — with two-layer caching.",
+    details:
+      "A real email-verification microservice in Go that checks whether an address is actually deliverable by talking to the recipient's mail server directly. It validates syntax, resolves the domain's MX records, then opens an SMTP connection and walks the MAIL FROM / RCPT TO handshake to confirm the mailbox exists — catching non-existent addresses that pass every syntactic check. Results are cached two ways: an in-memory MX cache avoids repeated DNS lookups, and a persistent database cache makes any previously-seen address an instant hit. Built solo in early 2017 on a lightweight Go HTTP framework, it's the lower-level cousin of the later Heimdall gateway — where Heimdall caches third-party vendor results, this service does the network-level verification itself.",
+    markdown: smtpEmailVerifier,
+    tags: ["Go", "Echo", "SMTP", "DNS", "MySQL"],
+  },
+  {
+    slug: "campaign-routing-engine",
+    name: "Campaign & Path Routing Engine",
+    summary:
+      "A data-driven job-routing engine I founded — configurable filter 'campaigns' composed into 'paths' that process in parallel, fault-tolerantly. Clean layered Koa/BullMQ/MongoDB service.",
+    details:
+      "A campaign-and-path routing engine for a staffing business: given a search (keyword + location) it decides which jobs to surface by running them through reusable, configurable filtering rules. I founded the service and built its functional core. A campaign is a named set of filters (only / block / match) bound to a job source; processing it fetches jobs and keeps only those passing every filter. A path is a collection of campaigns applied to the same search and aggregated — and I designed paths to process their campaigns in parallel, gracefully tolerating individual failures. I built the campaign model and filter-operator engine, the path-processing orchestration, the API endpoints, the job-feed client, MongoDB persistence, and a cleanly layered service skeleton (transport/service/utils) with BullMQ workers and cron under Redis distributed locking for safe horizontal scaling. A second engineer later added request validation and docs. The point: turning bespoke routing logic into a configurable engine non-engineers can compose.",
+    markdown: campaignRoutingEngine,
+    tags: ["Node.js", "Koa", "BullMQ", "Redis", "MongoDB"],
+  },
+  {
+    slug: "realtime-analytics-platform",
+    name: "Real-Time Campaign Analytics Platform",
+    summary:
+      "A full-stack, real-time marketing analytics platform built over 5 years — concurrent fault-tolerant event ingestion with backpressure, per-minute multi-dimensional aggregation, and a React dashboard of live charts and cohort reports. I drove the backend and led the frontend.",
+    details:
+      "A full-stack, real-time marketing analytics platform — the live dashboard the business watched to see email and SMS campaign performance minute by minute. Events stream in from every channel (sends, opens, clicks, SMS activity, unsubscribes), get aggregated server-side into time-bucketed multi-dimensional stats, and surface in a rich React dashboard with charts, breakdowns, cohort analysis and year-over-year comparison. The core engineering is a concurrent, fault-tolerant ingestion pipeline that drains a high-volume external queue plus Redis in parallel batches — capped for graceful backpressure — de-normalizes each event into several aggregation trees, and merges them incrementally into the day's stats document so concurrent updates never clobber. A Redis cache keeps dashboards snappy; scheduled jobs handle heavier daily rollups. One of my largest, longest-running projects (2017–2022): I built the TypeScript/Koa backend almost entirely and led the React/Redux frontend.",
+    markdown: realtimeAnalyticsPlatform,
+    tags: ["TypeScript", "Koa", "React", "Redux", "MongoDB", "Redis"],
+  },
+  {
+    slug: "webhook-config-hub",
+    name: "Multi-Tenant Webhook & Config Hub",
+    summary:
+      "A solo-built Go service for a 9-brand job-board network — serves per-app configuration and ingests email/SMS provider webhooks, classifying bounces, unsubscribes and stop-words, with cache-aside config and async stats streaming.",
+    details:
+      "A multi-tenant webhook hub and configuration service in Go that sat at the edge of a nine-brand job-board network and did two jobs at once: serving each app its configuration (templates, subject pools, ad configs) and receiving the flood of delivery and engagement webhooks from email and SMS providers — classifying each event (hard/soft bounce, spam complaint, unsubscribe, plus SMS stop-word/more/help detection), enforcing a global blacklist, and routing events to the right downstream queues. Per-app config is served cache-aside from Redis via a custom cache layer that tracks its own keys for admin inspection and bulk invalidation; nine brand-specific route groups mount under one service; and stat events stream to the analytics platform through a CPU-sized goroutine pool so webhooks stay fast. I built it solo, end to end, over roughly four years (2017–2021) — the integration layer a messaging business lives or dies on.",
+    markdown: webhookConfigHub,
+    tags: ["Go", "Chi", "Redis", "MongoDB", "Webhooks"],
   },
 ];
 

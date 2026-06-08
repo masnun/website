@@ -1,0 +1,16 @@
+import { useEffect, useState } from "react";
+
+// Minimal hash-based router. Returns the path portion after "#".
+// e.g. URL "...#/project/foo" -> "/project/foo"; home -> "".
+export function useHashRoute() {
+  const read = () => window.location.hash.replace(/^#/, "");
+  const [route, setRoute] = useState(read);
+
+  useEffect(() => {
+    const onChange = () => setRoute(read());
+    window.addEventListener("hashchange", onChange);
+    return () => window.removeEventListener("hashchange", onChange);
+  }, []);
+
+  return route;
+}

@@ -1,9 +1,13 @@
 // Single source of truth for the whole site. Edit this file to update content —
 // every section renders from here, so the page stays "dynamic" / data-driven.
 
+import smsDeliveryPlatform from "./content/sms-delivery-platform.md?raw";
+import jobAggregationMicroservice from "./content/job-aggregation-microservice.md?raw";
+import centralDataPipelineService from "./content/central-data-pipeline-service.md?raw";
+
 export const profile = {
   name: "Abu Ashraf Masnun",
-  tagline: "passionate software craftsman",
+  tagline: "PASSIONATE SOFTWARE CRAFTSMAN",
   // Rotating words for the animated hero headline.
   roles: [
     "Full Stack Developer",
@@ -19,7 +23,7 @@ export const profile = {
   github: "github.com/masnun",
   cv: "Abu Ashraf Masnun - CV.pdf",
   summary:
-    "I am a passionate, self motivated, deeply driven full stack developer who loves hacking on new stuff. I'm amazed by new cool toys but at the same time I understand the value of choosing boring technologies to get things done. I love and follow agile methodologies. I'm a team player, I love learning from and sharing with others. I am an OSS enthusiast. At my leisure, I participate in different programming related discussion forums and try to help others.",
+    "I'm a full stack developer who genuinely enjoys building software. New tools excite me, but I've learned to reach for boring, proven technology when the goal is to ship something that lasts. I work the agile way and do my best work on a team — sharing what I know and learning from everyone around me. Open source is close to my heart; in my spare time you'll usually find me on developer forums, answering questions and helping others get unstuck.",
 };
 
 export type Skill = {
@@ -190,6 +194,62 @@ export const explored: Explored[] = [
   {
     tech: "Supervisor, Gearman, RabbitMQ",
     note: "Explored for building distributed background processing.",
+  },
+];
+
+export type Project = {
+  // URL slug for the dedicated detail page (#/project/<slug>).
+  slug: string;
+  name: string;
+  // Short one-liner shown on the front-page card.
+  summary: string;
+  // Overview paragraph shown at the top of the detail page.
+  details: string;
+  // Optional rich-text (Markdown) body rendered on the detail page. When
+  // present it replaces `details` — supports headings, lists, tables, code.
+  markdown?: string;
+  tags: string[];
+  link?: string;
+};
+
+export const projects: Project[] = [
+  {
+    slug: "sms-delivery-platform",
+    name: "SMS Delivery Platform",
+    summary:
+      "Go platform I designed and built that reliably delivers 400k+ SMS per day across multiple brands — driving revenue while staying fully compliant.",
+    details:
+      "I designed and built this multi-tenant messaging platform in Go to power a staffing product's job-alert business. It dependably delivers 400k+ messages a day across multiple brands and six SMS providers, and owns the full revenue-generating lifecycle — from lead ingestion to compliant delivery, event tracking and reporting. I engineered it to never send a duplicate, never break SMS regulations, and keep running when a provider fails — the kind of reliability the business depends on every single day.",
+    markdown: smsDeliveryPlatform,
+    tags: ["Go", "Asynq", "Redis", "MongoDB", "Chi"],
+  },
+  {
+    slug: "job-aggregation-microservice",
+    name: "Job Aggregation Microservice",
+    summary:
+      "High-throughput Node.js platform aggregating job board APIs and ad networks into one feed, with full revenue attribution streamed to Snowflake and reported in Metabase.",
+    details:
+      "I designed and built this Node.js platform to pull job listings from external job boards and ad networks, blend them into one unified feed, and serve them through a single API. On top of that it runs a complete revenue pipeline — tracking impressions, clicks and affiliate earnings, tying every dollar of partner revenue back to the search that produced it, and exporting the results to Snowflake for reporting in Metabase. It hides the quirks of every partner network behind one dependable feed and keeps the money accurate at scale.",
+    markdown: jobAggregationMicroservice,
+    tags: ["Node.js", "JavaScript", "Koa", "BullMQ", "MongoDB", "Snowflake"],
+  },
+  {
+    slug: "central-data-pipeline-service",
+    name: "Central Data Pipeline Service",
+    summary:
+      "Central Node.js data pipeline routing analytics events from 20+ apps and 60+ event types into Snowflake — built memory-flat, exactly-once, and extensible by config.",
+    details:
+      "I designed and built the central data pipeline that unifies analytics from an entire product suite into one warehouse. 10+ internal services and platforms send their events to a single API; the service validates, batches, deduplicates, transforms and lands them in Snowflake for business reporting across 60+ event types. I engineered it to never lose or duplicate an event, to stream large batches through with flat memory, and to onboard a new data source by config alone — the kind of reliable backbone every BI dashboard in the company sits downstream of.",
+    markdown: centralDataPipelineService,
+    tags: ["Node.js", "Koa", "BullMQ", "Redis", "MongoDB", "Snowflake"],
+  },
+  {
+    slug: "realtime-chat-conferencing",
+    name: "Realtime Chat & Conferencing",
+    summary: "Realtime chat over WebSocket and experimental WebRTC video.",
+    details:
+      "Built a realtime chat system over WebSocket with presence and message fan-out, then went further with an experimental WebRTC video conferencing setup — handling signaling, peer negotiation and media streams between participants.",
+    tags: ["WebSocket", "WebRTC", "Node.js"],
   },
 ];
 

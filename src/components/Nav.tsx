@@ -3,6 +3,7 @@ import { profile } from "../data.ts";
 
 const links = [
   ["about", "About"],
+  ["projects", "Projects"],
   ["skills", "Skills"],
   ["experience", "Experience"],
   ["leadership", "Community"],

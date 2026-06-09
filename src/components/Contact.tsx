@@ -18,7 +18,7 @@ export function Contact() {
   return (
     <div className="contact">
       <p className="prose contact__lead">
-        Open to interesting problems and good teams. Drop a line — I'm always
+        Open to interesting problems and good teams. Drop a line - I'm always
         around.
       </p>
       <div className="contact__grid">

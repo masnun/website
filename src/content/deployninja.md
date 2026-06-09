@@ -1,15 +1,15 @@
 ## Overview
 
-**Deployninja** lets you deploy your SVN and Git repositories to your web server in a painless fashion — point it at a repo, and it takes care of fetching the code and getting it onto your servers without the usual manual ceremony. It was built at Leevio.
+**Deployninja** lets you deploy your SVN and Git repositories to your web server in a painless fashion - point it at a repo, and it takes care of fetching the code and getting it onto your servers without the usual manual ceremony. It was built at Leevio.
 
-I worked on Deployninja as a **backend engineer**, and I built **all the algorithms that fetch the repositories and upload them to the servers** — the core of what the product actually does.
+I worked on Deployninja as a **backend engineer**, and I built **all the algorithms that fetch the repositories and upload them to the servers** - the core of what the product actually does.
 
 ## What It Does
 
-- **Connects to your repositories** — works with both SVN and Git source repos.
-- **Fetches the code** — pulls the right revision/branch from the repository.
-- **Uploads to your servers** — pushes the fetched code out to the target web server, painlessly.
-- **Runs the heavy lifting in the background** — deployment work is queued and processed by long-running workers rather than blocking the user.
+- **Connects to your repositories** - works with both SVN and Git source repos.
+- **Fetches the code** - pulls the right revision/branch from the repository.
+- **Uploads to your servers** - pushes the fetched code out to the target web server, painlessly.
+- **Runs the heavy lifting in the background** - deployment work is queued and processed by long-running workers rather than blocking the user.
 
 ## My Role
 

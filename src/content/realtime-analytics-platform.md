@@ -1,16 +1,16 @@
 ## Overview
 
-A **full-stack, real-time marketing analytics platform** — the live dashboard the business actually watched to see how its email and SMS campaigns were performing, minute by minute. Events stream in from every channel (email sends/opens/clicks, SMS activity, job clicks, unsubscribes), get aggregated server-side into time-bucketed metrics, and surface in a rich React dashboard of charts, breakdowns, and cohort reports. It was one of my largest and longest-running projects, built and evolved over five years.
+A **full-stack, real-time marketing analytics platform** - the live dashboard the business actually watched to see how its email and SMS campaigns were performing, minute by minute. Events stream in from every channel (email sends/opens/clicks, SMS activity, job clicks, unsubscribes), get aggregated server-side into time-bucketed metrics, and surface in a rich React dashboard of charts, breakdowns, and cohort reports. It was one of my largest and longest-running projects, built and evolved over five years.
 
 I drove this end to end: I built the **backend almost entirely** and **led the frontend**, partnering with one other engineer on the UI.
 
 ## What It Does
 
-- **Ingests events in real time.** Upstream systems — the engagement tracker, the lead distributor, the SMS and email platforms — push events to the platform's queue endpoints continuously.
-- **Aggregates as it goes.** A background pipeline runs every minute, draining the queues and rolling raw events up into multi-dimensional daily stats: by channel, source, provider, template, campaign type, and device — all bucketed to a consistent timezone.
+- **Ingests events in real time.** Upstream systems - the engagement tracker, the lead distributor, the SMS and email platforms - push events to the platform's queue endpoints continuously.
+- **Aggregates as it goes.** A background pipeline runs every minute, draining the queues and rolling raw events up into multi-dimensional daily stats: by channel, source, provider, template, campaign type, and device - all bucketed to a consistent timezone.
 - **Visualizes everything.** The React dashboard renders time-series charts and segmented breakdowns of sends, opens, clicks, and unsubscribes, with date-range pickers and year-over-year trend comparison.
 - **Goes beyond vanity metrics.** Cohort analysis (retention and value by signup cohort), per-source revenue/profit, and traffic breakdowns turn raw activity into decisions.
-- **Manages the campaigns too.** Beyond analytics, it includes management surfaces — email/SMS template editing, lead-feed configuration with selectable optimization algorithms, incoming-SMS log review — and CSV/Excel report exports.
+- **Manages the campaigns too.** Beyond analytics, it includes management surfaces - email/SMS template editing, lead-feed configuration with selectable optimization algorithms, incoming-SMS log review - and CSV/Excel report exports.
 
 ## Engineering Highlights
 
@@ -24,11 +24,11 @@ A Redis caching layer with sensible TTLs shields the database from repeated dash
 
 ### Full-stack delivery
 
-On the frontend I led a React + Redux single-page app with charting, autocomplete search, date-range controls, and drag-and-drop configuration — talking to a typed Koa/TypeScript API with JWT auth. Owning both halves meant the data model, the API, and the visualizations were designed together rather than bolted on.
+On the frontend I led a React + Redux single-page app with charting, autocomplete search, date-range controls, and drag-and-drop configuration - talking to a typed Koa/TypeScript API with JWT auth. Owning both halves meant the data model, the API, and the visualizations were designed together rather than bolted on.
 
 ## Why It Matters
 
-This is enterprise-grade, full-stack systems engineering sustained over five years: high-volume real-time ingestion with backpressure, multi-dimensional incremental aggregation, a caching strategy that keeps dashboards snappy, and a polished operator-facing UI on top — all designed and largely built by me. It's the project where the backend systems work and the product-facing frontend met in one codebase, and I owned the whole span.
+This is enterprise-grade, full-stack systems engineering sustained over five years: high-volume real-time ingestion with backpressure, multi-dimensional incremental aggregation, a caching strategy that keeps dashboards snappy, and a polished operator-facing UI on top - all designed and largely built by me. It's the project where the backend systems work and the product-facing frontend met in one codebase, and I owned the whole span.
 
 ## Tech Stack
 

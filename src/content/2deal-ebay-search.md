@@ -6,13 +6,13 @@ I joined to **port the existing application onto the Zend Framework**. I was the
 
 ## What It Does
 
-- **Fast eBay product search** — customers search and get back matching products ready to buy.
-- **Enriched product views** — each result is shown with additional information beyond the bare listing.
-- **Related products** — surfaces relevant alternatives to make browsing and discovery easier.
+- **Fast eBay product search** - customers search and get back matching products ready to buy.
+- **Enriched product views** - each result is shown with additional information beyond the bare listing.
+- **Related products** - surfaces relevant alternatives to make browsing and discovery easier.
 
 ## My Role
 
-The project was a **full migration of an existing application to Zend Framework**, and I owned it alone — architecture, routing, models and data access over MySQL, the eBay-backed search and product pages, and the jQuery-driven front-end behavior. Working solo on a framework port meant taking the existing functionality apart and rebuilding it cleanly within Zend's MVC structure, without losing features along the way.
+The project was a **full migration of an existing application to Zend Framework**, and I owned it alone - architecture, routing, models and data access over MySQL, the eBay-backed search and product pages, and the jQuery-driven front-end behavior. Working solo on a framework port meant taking the existing functionality apart and rebuilding it cleanly within Zend's MVC structure, without losing features along the way.
 
 ## Tech Stack
 

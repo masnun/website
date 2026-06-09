@@ -724,6 +724,7 @@ h1, h2, h3 {
 }
 .project-page__back {
   display: inline-block;
+  margin-top: 44px;
   margin-bottom: 24px;
   font-size: 0.9rem;
   font-weight: 600;

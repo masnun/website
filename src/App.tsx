@@ -124,7 +124,7 @@ export default function App() {
       </main>
     );
   } else {
-    // Slim homepage — highlights only, full lists live on sub-pages.
+    // Slim homepage - highlights only, full lists live on sub-pages.
     content = (
       <main>
         <Hero />

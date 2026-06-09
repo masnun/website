@@ -16,9 +16,9 @@ const MONTHS: Record<string, number> = {
   Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12,
 };
 
-// Sort key from the start of a period string like "Jul 2015 — Now" or "2016 — 2018".
+// Sort key from the start of a period string like "Jul 2015 - Now" or "2016 - 2018".
 function startKey(period: string): number {
-  const start = period.split(/[–—-]/)[0].trim();
+  const start = period.split(/[– - -]/)[0].trim();
   const m = start.match(/([A-Za-z]{3})?\s*(\d{4})/);
   if (!m) return 0;
   const year = Number(m[2]);

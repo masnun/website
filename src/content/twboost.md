@@ -1,12 +1,12 @@
 ## Overview
 
-**TwBoost** is a Twitter automation engine. A user defines a set of keywords and an automated reply message; the engine then periodically searches Twitter for those keywords and posts the replies at random intervals — automating outreach while staying natural enough to avoid looking like a rigid bot. The project was built on top of the Twitter APIs.
+**TwBoost** is a Twitter automation engine. A user defines a set of keywords and an automated reply message; the engine then periodically searches Twitter for those keywords and posts the replies at random intervals - automating outreach while staying natural enough to avoid looking like a rigid bot. The project was built on top of the Twitter APIs.
 
 ## What It Does
 
-- **Keyword + reply setup** — the user defines keywords to watch and the reply message to send.
-- **Periodic search** — the engine regularly searches Twitter for matching keywords via the Twitter APIs.
-- **Randomized auto-replies** — it posts the defined reply at random intervals, so the automation feels organic rather than mechanical.
+- **Keyword + reply setup** - the user defines keywords to watch and the reply message to send.
+- **Periodic search** - the engine regularly searches Twitter for matching keywords via the Twitter APIs.
+- **Randomized auto-replies** - it posts the defined reply at random intervals, so the automation feels organic rather than mechanical.
 
 ## My Role
 

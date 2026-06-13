@@ -3,7 +3,7 @@ import { Section } from "./Section.tsx";
 import { Journey } from "./Journey.tsx";
 import { Leadership } from "./Leadership.tsx";
 
-// The long-form "About Me" page (#/about).
+// The long-form "About Me" page (/about).
 export function AboutPage() {
   return (
     <>

@@ -11,14 +11,15 @@ import { Timeline } from "./components/Timeline.tsx";
 import { Testimonials } from "./components/Testimonials.tsx";
 import { Writing } from "./components/Writing.tsx";
 import { AboutPage } from "./components/AboutPage.tsx";
-import { useHashRoute } from "./hooks/useHashRoute.ts";
+import { useRoute } from "./router.tsx";
+import { metaFor } from "./seo.ts";
 import { profile, projects, workSummary } from "./data.ts";
 
 // A simple page banner reused by the sub-pages.
 function PageHead({ kicker, title }: { kicker: string; title: string }) {
   return (
     <div className="pagehead">
-      <a className="pagehead__back" href="#/">
+      <a className="pagehead__back" href="/">
         ← Home
       </a>
       <span className="section__kicker">{kicker}</span>
@@ -28,19 +29,16 @@ function PageHead({ kicker, title }: { kicker: string; title: string }) {
 }
 
 export default function App() {
-  const route = useHashRoute();
-
-  // Scroll to top on page changes; to the anchor when one is present.
-  useEffect(() => {
-    if (/^[a-z]/.test(route)) {
-      document.getElementById(route)?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: 0 });
-    }
-  }, [route]);
+  const route = useRoute();
 
   // Path without any query string (e.g. "/projects?skill=Go" -> "/projects").
   const path = route.split("?")[0];
+
+  // Keep the document title in sync on client-side navigation. The correct
+  // title is already in the prerendered HTML for the first paint.
+  useEffect(() => {
+    document.title = metaFor(path).title;
+  }, [path]);
 
   const projectMatch = path.match(/^\/project\/(.+)$/);
   const activeProject = projectMatch
@@ -132,7 +130,7 @@ export default function App() {
           <p className="prose">{profile.summary}</p>
           <Stats />
           <div className="section__more-wrap section__more-wrap--left">
-            <a className="btn btn--primary section__more-btn" href="#/about">
+            <a className="btn btn--primary section__more-btn" href="/about">
               More about me →
             </a>
           </div>
@@ -141,13 +139,13 @@ export default function App() {
           <Projects featuredOnly limit={4} />
           <div className="section__more-wrap">
             <div className="seg">
-              <a className="seg__btn" href="#/experience">
+              <a className="seg__btn" href="/experience">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M10 2a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4V4a2 2 0 0 0-2-2h-4zm0 2h4v2h-4V4z" />
                 </svg>
                 Work Experience
               </a>
-              <a className="seg__btn" href="#/projects">
+              <a className="seg__btn" href="/projects">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 2 2 7l10 5 10-5zM2 12l10 5 10-5-1.9-.95L12 14.85 3.9 11.05zM2 17l10 5 10-5-1.9-.95L12 19.85 3.9 15.05z" />
                 </svg>
@@ -159,7 +157,7 @@ export default function App() {
         <Section id="testimonials" title="Testimonials" kicker="What people say">
           <Testimonials authors={["Patrick Brown", "Ash Hoey"]} />
           <div className="section__more-wrap section__more-wrap--left">
-            <a className="btn btn--primary section__more-btn" href="#/testimonials">
+            <a className="btn btn--primary section__more-btn" href="/testimonials">
               Read all testimonials →
             </a>
           </div>

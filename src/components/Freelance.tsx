@@ -19,7 +19,7 @@ export function Freelance({ full = false }: Props) {
       {!full && (
         <a
           className="btn btn--primary section__more-btn freelance__cta"
-          href="#/experience"
+          href="/experience"
         >
           See my freelance work →
         </a>

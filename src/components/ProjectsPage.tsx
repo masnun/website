@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { Projects } from "./Projects.tsx";
 import { OssProjects } from "./OssProjects.tsx";
 import { projects, ossProjects, skills } from "../data.ts";
-import { useHashRoute } from "../hooks/useHashRoute.ts";
+import { useRoute } from "../router.tsx";
 
 type Tab = "all" | "engineering" | "oss";
 
 export function ProjectsPage() {
   const [tab, setTab] = useState<Tab>("all");
-  const route = useHashRoute();
+  const route = useRoute();
 
   // Active filter comes from the URL:
-  //   #/projects?skill=<name>  ?tag=<tag>  (engineering tab)
-  //   #/projects?osstag=<tag>            (open-source tab)
+  //   /projects?skill=<name>  ?tag=<tag>  (engineering tab)
+  //   /projects?osstag=<tag>            (open-source tab)
   const query = route.split("?")[1] ?? "";
   const params = new URLSearchParams(query);
   const skillParam = params.get("skill");
@@ -76,7 +76,7 @@ export function ProjectsPage() {
             <a
               key={s.name}
               className="filter-pill"
-              href={`#/projects?skill=${encodeURIComponent(s.name)}`}
+              href={`/projects?skill=${encodeURIComponent(s.name)}`}
             >
               {s.name}
             </a>
@@ -90,7 +90,7 @@ export function ProjectsPage() {
             Showing {filteredCount} project{filteredCount === 1 ? "" : "s"} for{" "}
             <strong>{activeLabel}</strong>
           </span>
-          <a className="filter-box__clear" href="#/projects">
+          <a className="filter-box__clear" href="/projects">
             clear filter
           </a>
         </div>
@@ -102,7 +102,7 @@ export function ProjectsPage() {
             Showing {ossFilteredCount} project{ossFilteredCount === 1 ? "" : "s"}{" "}
             for <strong>{ossTagParam}</strong>
           </span>
-          <a className="filter-box__clear" href="#/projects">
+          <a className="filter-box__clear" href="/projects">
             clear filter
           </a>
         </div>

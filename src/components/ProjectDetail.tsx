@@ -10,7 +10,7 @@ export function ProjectDetail({ project }: { project: Project }) {
 
   return (
     <article className="section project-page">
-      <a className="project-page__back" href="#/projects">
+      <a className="project-page__back" href="/projects">
         ← Back to projects
       </a>
 
@@ -22,7 +22,7 @@ export function ProjectDetail({ project }: { project: Project }) {
           <a
             key={t}
             className="project__tag project__tag--link"
-            href={`#/projects?tag=${encodeURIComponent(t)}`}
+            href={`/projects?tag=${encodeURIComponent(t)}`}
           >
             {t}
           </a>

@@ -20,7 +20,7 @@ export function OssProjects({ filterTag }: Props) {
               <a
                 key={t}
                 className="project__tag project__tag--link"
-                href={`#/projects?osstag=${encodeURIComponent(t)}`}
+                href={`/projects?osstag=${encodeURIComponent(t)}`}
               >
                 {t}
               </a>

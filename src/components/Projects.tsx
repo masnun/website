@@ -28,13 +28,13 @@ export function Projects({ featuredOnly = false, filterTags, limit }: Props) {
               <a
                 key={t}
                 className="project__tag project__tag--link"
-                href={`#/projects?tag=${encodeURIComponent(t)}`}
+                href={`/projects?tag=${encodeURIComponent(t)}`}
               >
                 {t}
               </a>
             ))}
           </div>
-          <a className="project__more" href={`#/project/${p.slug}`}>
+          <a className="project__more" href={`/project/${p.slug}`}>
             View details →
           </a>
         </div>

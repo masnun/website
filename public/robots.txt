@@ -1,0 +1,30 @@
+# All crawlers, including AI/LLM bots, are welcome.
+User-agent: *
+Allow: /
+
+# Explicitly allow common AI crawlers (subset of the above, stated for clarity).
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://masnun.me/sitemap.xml

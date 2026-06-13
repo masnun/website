@@ -48,7 +48,7 @@ export function Skills() {
             <p className="modal__text">{active.blurb}</p>
             <a
               className="skill-item__cta"
-              href={`#/projects?skill=${encodeURIComponent(active.name)}`}
+              href={`/projects?skill=${encodeURIComponent(active.name)}`}
               onClick={() => setActive(null)}
             >
               See related projects →

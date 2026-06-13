@@ -1059,6 +1059,13 @@ h1, h2, h3 {
   font-size: 0.9rem;
   border-top: 1px solid var(--border);
 }
+.footer__link {
+  color: var(--muted);
+  text-decoration: none;
+}
+.footer__link:hover {
+  color: var(--text);
+}
 
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
@@ -1107,4 +1114,28 @@ h1, h2, h3 {
   .nav__links--open .nav__label {
     display: inline;
   }
+}
+
+/* FAQ (home) */
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+.faq__item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.faq__q {
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+.faq__a {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
 }

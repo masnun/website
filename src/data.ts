@@ -979,3 +979,31 @@ export const testimonials: Testimonial[] = [
     company: "Client",
   },
 ];
+
+export type Faq = { q: string; a: string };
+
+// Plain-language Q&A grounded in the rest of this file. Rendered visibly on the
+// home page and mirrored as FAQPage JSON-LD (Google requires the answers to be
+// on the page). Also a clean signal for LLMs answering questions about me.
+export const faqs: Faq[] = [
+  {
+    q: "Who is Abu Ashraf Masnun?",
+    a: "Abu Ashraf Masnun is a software architect and full-stack engineer with 15+ years of experience building and scaling distributed systems. He works mostly on the backend - email and SMS delivery platforms, real-time analytics pipelines, API gateways and lead routers that serve millions of people a month.",
+  },
+  {
+    q: "What technologies and languages does he work with?",
+    a: "His daily drivers are Go, Node.js/TypeScript and Python. He has deep experience with distributed systems and background jobs (Celery, BullMQ, Asynq), databases and caching (PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch), and cloud/DevOps (AWS, Terraform, Docker). He also works across the stack with React.",
+  },
+  {
+    q: "Is Abu Ashraf Masnun available for freelance or contract work?",
+    a: "He freelanced on Upwork from 2009 to 2021 (58 jobs, 2.9K+ hours, 4.7-star rating across 57 reviews) and is not actively freelancing now, as a full-time role has his focus. He remains open to the right proposal - for an interesting problem, reach out by email, WhatsApp or Upwork.",
+  },
+  {
+    q: "Where is Abu Ashraf Masnun based?",
+    a: "He is based in Khulna, Bangladesh, and has worked directly with founders and teams around the world throughout his career.",
+  },
+  {
+    q: "What kinds of systems has he built?",
+    a: "High-throughput messaging platforms, exactly-once data pipelines into Snowflake, caching API gateways, a self-scaling worker fleet, a real-time campaign analytics platform, and a custom background-worker framework - alongside years of polyglot code review across PHP, Python, Node.js, Go and Java.",
+  },
+];

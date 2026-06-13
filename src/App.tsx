@@ -10,6 +10,7 @@ import { ProjectDetail } from "./components/ProjectDetail.tsx";
 import { Timeline } from "./components/Timeline.tsx";
 import { Testimonials } from "./components/Testimonials.tsx";
 import { Writing } from "./components/Writing.tsx";
+import { Faq } from "./components/Faq.tsx";
 import { AboutPage } from "./components/AboutPage.tsx";
 import { useRoute } from "./router.tsx";
 import { metaFor } from "./seo.ts";
@@ -121,6 +122,15 @@ export default function App() {
         </Section>
       </main>
     );
+  } else if (path === "/faq") {
+    content = (
+      <main>
+        <PageHead kicker="Common questions" title="FAQ" />
+        <Section id="faq" title="Frequently Asked Questions" kicker="About me & my work">
+          <Faq />
+        </Section>
+      </main>
+    );
   } else {
     // Slim homepage - highlights only, full lists live on sub-pages.
     content = (
@@ -173,6 +183,10 @@ export default function App() {
       <footer className="footer">
         <p>
           © {new Date().getFullYear()} {profile.name}. Built with React &amp; Vite.
+          {" · "}
+          <a className="footer__link" href="/faq">
+            FAQ
+          </a>
         </p>
       </footer>
     </>

@@ -3,7 +3,14 @@
 // prerender (entry-server.tsx) and the client (App.tsx updates the title on
 // SPA navigation). Keep this the single source of truth for anything <head>.
 
-import { profile, projects, skills, blogPosts, ossProjects } from "./data.ts";
+import {
+  profile,
+  projects,
+  skills,
+  blogPosts,
+  ossProjects,
+  faqs,
+} from "./data.ts";
 
 export const SITE = {
   origin: "https://masnun.me",
@@ -42,6 +49,11 @@ const staticMeta: Record<string, Meta> = {
     description:
       "What clients say about working with Abu Ashraf Masnun — 4.7★ across 57 Upwork reviews over a decade of backend and distributed-systems work.",
   },
+  "/faq": {
+    title: "FAQ — Abu Ashraf Masnun",
+    description:
+      "Frequently asked questions about Abu Ashraf Masnun — what he does, his tech stack, availability for work, and the kinds of systems he has built.",
+  },
 };
 
 // Every URL the site prerenders. Order is sitemap order.
@@ -53,6 +65,7 @@ export function allRoutes(): string[] {
     "/projects",
     "/writing",
     "/testimonials",
+    "/faq",
     ...projects.map((p) => `/project/${p.slug}`),
   ];
 }
@@ -82,8 +95,15 @@ const esc = (s: string) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
-function jsonLd(): string {
-  const data = {
+// Serialize a JSON-LD object into a <script> tag, escaping "<" so the JSON
+// stays safe inside HTML.
+function ldScript(data: unknown): string {
+  const json = JSON.stringify(data).replace(/</g, "\\u003c");
+  return `<script type="application/ld+json">${json}</script>`;
+}
+
+function personLd(): object {
+  return {
     "@context": "https://schema.org",
     "@type": "Person",
     name: SITE.name,
@@ -110,8 +130,60 @@ function jsonLd(): string {
       profile.upwork,
     ],
   };
-  // Escape "<" to keep the JSON safe inside an HTML <script> block.
-  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
+function faqLd(): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+// Breadcrumb trail for a route, or null for the home page (no trail).
+const sectionLabels: Record<string, string> = {
+  "/about": "About",
+  "/experience": "Experience",
+  "/projects": "Projects",
+  "/writing": "Writing",
+  "/testimonials": "Testimonials",
+  "/faq": "FAQ",
+};
+
+function breadcrumbLd(path: string): object | null {
+  const clean = path.split("?")[0];
+  if (clean === "/") return null;
+
+  const crumbs: { name: string; url: string }[] = [
+    { name: "Home", url: canonical("/") },
+  ];
+
+  const projectMatch = clean.match(/^\/project\/(.+)$/);
+  if (projectMatch) {
+    const p = projects.find((x) => x.slug === projectMatch[1]);
+    if (!p) return null;
+    crumbs.push({ name: "Projects", url: canonical("/projects") });
+    crumbs.push({ name: p.name, url: canonical(clean) });
+  } else if (sectionLabels[clean]) {
+    crumbs.push({ name: sectionLabels[clean], url: canonical(clean) });
+  } else {
+    return null;
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: c.url,
+    })),
+  };
 }
 
 // The full set of <head> tags injected for a given route during prerender.
@@ -136,9 +208,10 @@ export function headTags(path: string): string {
     `<meta name="twitter:description" content="${esc(description)}" />`,
     `<meta name="twitter:image" content="${img}" />`,
   ];
-  if (clean === "/") {
-    tags.push(`<script type="application/ld+json">${jsonLd()}</script>`);
-  }
+  if (clean === "/") tags.push(ldScript(personLd()));
+  if (clean === "/faq") tags.push(ldScript(faqLd()));
+  const crumbs = breadcrumbLd(clean);
+  if (crumbs) tags.push(ldScript(crumbs));
   return tags.join("\n    ");
 }
 
@@ -174,6 +247,7 @@ export function llmsTxt(): string {
   lines.push(
     `- [Testimonials](${u("/testimonials")}): ${metaFor("/testimonials").description}`
   );
+  lines.push(`- [FAQ](${u("/faq")}): ${metaFor("/faq").description}`);
   lines.push("");
 
   lines.push("## Projects");
@@ -214,6 +288,13 @@ export function llmsFullTxt(): string {
   out.push("## Summary");
   out.push(profile.summary);
   out.push("");
+
+  out.push("## FAQ");
+  for (const f of faqs) {
+    out.push(`### ${f.q}`);
+    out.push(f.a);
+    out.push("");
+  }
 
   out.push("## About");
   for (const para of profile.about) out.push(para + "\n");

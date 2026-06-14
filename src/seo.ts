@@ -15,9 +15,9 @@ import {
 export const SITE = {
   origin: "https://masnun.me",
   name: profile.name,
-  title: "Abu Ashraf Masnun — Software Craftsman",
+  title: "Abu Ashraf Masnun · Software Craftsman",
   description:
-    "Abu Ashraf Masnun — passionate full stack software developer. Python, Go, Node.js. Building scalable systems used by millions.",
+    "Abu Ashraf Masnun, a passionate full stack software developer. Python, Go, Node.js. Building scalable systems used by millions.",
 };
 
 type Meta = { title: string; description: string };
@@ -25,34 +25,34 @@ type Meta = { title: string; description: string };
 const staticMeta: Record<string, Meta> = {
   "/": { title: SITE.title, description: SITE.description },
   "/about": {
-    title: "About — Abu Ashraf Masnun",
+    title: "About · Abu Ashraf Masnun",
     description:
       "Abu Ashraf Masnun's story: 15+ years building backend and distributed systems, from self-taught teenager in Khulna to technical architect across Python, Go and Node.js.",
   },
   "/experience": {
-    title: "Experience — Abu Ashraf Masnun",
+    title: "Experience · Abu Ashraf Masnun",
     description:
-      "15+ years of full-time and freelance engineering — high-scale email & SMS platforms, data pipelines, API gateways and polyglot code review across Python, Go and Node.js.",
+      "15+ years of full-time and freelance engineering - high-scale email & SMS platforms, data pipelines, API gateways and polyglot code review across Python, Go and Node.js.",
   },
   "/projects": {
-    title: "Projects — Abu Ashraf Masnun",
+    title: "Projects · Abu Ashraf Masnun",
     description:
       "Selected work by Abu Ashraf Masnun: distributed systems, messaging platforms, real-time analytics, data pipelines and open-source projects in Go, Node.js and Python.",
   },
   "/writing": {
-    title: "Writing — Abu Ashraf Masnun",
+    title: "Writing · Abu Ashraf Masnun",
     description:
       "In-depth technical writing on async & concurrency, language internals, Go, distributed systems and API design from masnun.com and masnun.rocks.",
   },
   "/testimonials": {
-    title: "Testimonials — Abu Ashraf Masnun",
+    title: "Testimonials · Abu Ashraf Masnun",
     description:
-      "What clients say about working with Abu Ashraf Masnun — 4.7★ across 57 Upwork reviews over a decade of backend and distributed-systems work.",
+      "What clients say about working with Abu Ashraf Masnun - 4.7★ across 57 Upwork reviews over a decade of backend and distributed-systems work.",
   },
   "/faq": {
-    title: "FAQ — Abu Ashraf Masnun",
+    title: "FAQ · Abu Ashraf Masnun",
     description:
-      "Frequently asked questions about Abu Ashraf Masnun — what he does, his tech stack, availability for work, and the kinds of systems he has built.",
+      "Frequently asked questions about Abu Ashraf Masnun - what he does, his tech stack, availability for work, and the kinds of systems he has built.",
   },
 };
 
@@ -76,7 +76,7 @@ export function metaFor(path: string): Meta {
   const m = clean.match(/^\/project\/(.+)$/);
   if (m) {
     const p = projects.find((x) => x.slug === m[1]);
-    if (p) return { title: `${p.name} — ${SITE.name}`, description: p.summary };
+    if (p) return { title: `${p.name} · ${SITE.name}`, description: p.summary };
   }
   return staticMeta["/"];
 }

@@ -21,7 +21,7 @@ I set up the whole service skeleton: a cleanly **layered architecture** - HTTP t
 ## Engineering Highlights
 
 - **Configuration over code.** The filtering logic lives in stored campaign definitions, so routing behavior changes by editing data, not deploying code.
-- **Parallel, fault-tolerant processing.** Paths fan their campaigns out concurrently and aggregate only the successes - robust against any single campaign erroring.
+- **Parallel, fault-tolerant processing.** Paths fan their campaigns out concurrently and aggregate only the successes, so any single campaign erroring never sinks the whole request.
 - **Clean layering.** Transport → services → utils separation makes the core testable and the responsibilities obvious - the kind of structure a team can extend without friction.
 - **Horizontal-scale ready.** Redis-backed distributed locks on scheduled jobs and graceful shutdown make it safe to run multiple instances behind an orchestrator.
 

@@ -54,7 +54,6 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/masnun",
   stackoverflow: "https://stackoverflow.com/users/301107/masnun",
   upwork: "https://www.upwork.com/freelancers/abuashrafmasnun",
-  cv: "Abu Ashraf Masnun - CV.pdf",
   summary:
     "Over 15 years of building and scaling distributed systems has taught me what makes software last - and exactly where it breaks. These days, I pair that hard-won judgment with modern AI tooling to ship faster without compromising on code quality. The AI handles the boilerplate and accelerates execution, but I make the architectural calls and keep the quality bar high. The craft is still human; I just have better leverage now.",
   // Longer narrative for the dedicated "About Me" page (#/about).

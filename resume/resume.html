@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Abu Ashraf Masnun — Resume</title>
+<style>
+  @font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-Regular.ttf");
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url("fonts/JetBrainsMono.ttf");
+    font-weight: 100 800;
+  }
+
+  :root {
+    --accent: #6d28d9;
+    --accent-soft: #f3effd;
+    --teal: #0d9488;
+    --text: #1b1f27;
+    --muted: #586072;
+    --border: #e2e5ea;
+    --bg-soft: #f7f7fb;
+  }
+
+  @page {
+    size: A4;
+    margin: 14mm 15mm 16mm 15mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { font-size: 10.2pt; }
+
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    color: var(--text);
+    line-height: 1.42;
+    margin: 0;
+    -weasy-hyphens: none;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+
+  /* ---------- Header band ---------- */
+  .head {
+    border-left: 4px solid var(--accent);
+    padding: 2px 0 12px 14px;
+    margin-bottom: 14px;
+  }
+  .name {
+    font-size: 25pt;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    line-height: 1.05;
+    margin: 0;
+  }
+  .tagline {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 5px 0 9px;
+  }
+  .contact {
+    font-size: 8.7pt;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .contact .sep { color: var(--border); margin: 0 6px; }
+  .contact b { color: var(--text); font-weight: 600; }
+
+  /* ---------- Section headings ---------- */
+  h2.sec {
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 17px 0 9px;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid var(--border);
+  }
+
+  .summary {
+    font-size: 9.7pt;
+    color: #2b3140;
+    margin: 0 0 4px;
+  }
+
+  /* ---------- Two-column highlight block ---------- */
+  .grid {
+    display: flex;
+    gap: 22px;
+    margin-top: 4px;
+  }
+  .grid .col-main { flex: 1.45; }
+  .grid .col-side { flex: 1; }
+
+  .skillgroup { margin-bottom: 8px; }
+  .skillgroup .label {
+    font-size: 8.3pt;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .tags { line-height: 1.9; }
+  .tag {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 7.4pt;
+    font-weight: 500;
+    color: #44485a;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin: 0 3px 3px 0;
+  }
+  .tag.hot { color: var(--accent); background: var(--accent-soft); border-color: #e2d8fb; }
+
+  .stats { }
+  .stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--border);
+  }
+  .stat:last-child { border-bottom: none; }
+  .stat .num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12.5pt;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 58px;
+  }
+  .stat .lab { font-size: 8.6pt; color: var(--muted); }
+
+  /* ---------- Experience ---------- */
+  .job { margin-bottom: 11px; }
+  .job.tight { margin-bottom: 7px; }
+  .job .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .job .role { font-size: 10.3pt; font-weight: 700; }
+  .job .co { font-weight: 600; color: var(--accent); }
+  .job .period {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .job .desc { font-size: 9.1pt; color: #353b49; margin-top: 2px; }
+  .pasthead {
+    font-size: 8.6pt;
+    font-weight: 700;
+    color: var(--text);
+    margin: 4px 0 5px;
+  }
+  .pastlist { margin: 0; padding: 0; list-style: none; }
+  .pastlist li {
+    font-size: 8.9pt;
+    color: #353b49;
+    padding: 3px 0;
+    border-bottom: 1px dotted var(--border);
+  }
+  .pastlist li:last-child { border-bottom: none; }
+  .pastlist .role { font-weight: 700; color: var(--text); }
+  .pastlist .co { font-weight: 600; color: var(--accent); }
+  .pastlist .yr { font-family: "JetBrains Mono", monospace; font-size: 7.8pt; color: var(--muted); }
+
+  /* ---------- Projects ---------- */
+  .proj {
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    break-inside: avoid;
+  }
+  .proj:last-child { border-bottom: none; }
+  .proj .prow {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .proj .pname { font-size: 9.7pt; font-weight: 700; }
+  .proj .pstack {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 7.4pt;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .proj .pdesc { font-size: 8.8pt; color: #353b49; margin-top: 2px; }
+
+  .twocol { display: flex; gap: 22px; }
+  .twocol > div { flex: 1; }
+
+  .foot {
+    margin-top: 12px;
+    font-size: 8.3pt;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 7px;
+  }
+  .foot b { color: var(--text); font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <header class="head">
+    <h1 class="name">Abu Ashraf Masnun</h1>
+    <div class="tagline">Software Architect · Distributed Systems · Go · Node.js · Python</div>
+    <div class="contact">
+      <b>Khulna, Bangladesh</b><span class="sep">|</span>masnun@gmail.com<span class="sep">|</span>+880 1711 960803<br>
+      <a href="https://masnun.me">masnun.me</a><span class="sep">·</span>
+      <a href="https://github.com/masnun">github.com/masnun</a><span class="sep">·</span>
+      <a href="https://www.linkedin.com/in/masnun">linkedin.com/in/masnun</a><span class="sep">·</span>
+      <a href="https://stackoverflow.com/users/301107/masnun">Stack Overflow</a><span class="sep">·</span>
+      <a href="https://www.upwork.com/freelancers/abuashrafmasnun">Upwork</a>
+    </div>
+  </header>
+
+  <p class="summary">
+    Over 15 years of building and scaling distributed systems has taught me what makes software last,
+    and exactly where it breaks. These days, I pair that hard-won judgment with modern AI tooling to
+    ship faster without compromising on code quality. The AI handles the boilerplate and accelerates
+    execution, but I make the architectural calls and keep the quality bar high. The craft is still
+    human. I just have better leverage now.
+  </p>
+
+  <h2 class="sec">Highlighted Work</h2>
+
+  <div class="proj">
+    <div class="prow">
+      <span class="pname">SMS Delivery Platform</span>
+      <span class="pstack">Go</span>
+    </div>
+    <div class="pdesc">Multi-tenant, 400K+ msgs/day, six providers, duplicate-free, compliant, fault-tolerant.</div>
+  </div>
+
+  <div class="proj">
+    <div class="prow">
+      <span class="pname">Central Data Pipeline</span>
+      <span class="pstack">Node.js</span>
+    </div>
+    <div class="pdesc">20+ apps into Snowflake, 60+ event types, exactly-once, flat memory.</div>
+  </div>
+
+  <div class="proj">
+    <div class="prow">
+      <span class="pname">Real-Time Campaign Analytics</span>
+      <span class="pstack">TypeScript / React</span>
+    </div>
+    <div class="pdesc">5-year full-stack platform; concurrent fault-tolerant ingestion, live dashboards.</div>
+  </div>
+
+  <div class="proj">
+    <div class="prow">
+      <span class="pname">Custom Background-Worker Framework</span>
+      <span class="pstack">Python</span>
+    </div>
+    <div class="pdesc">Plugin workers with DI, centralized error handling, graceful shutdown; ~20 production workers.</div>
+  </div>
+
+  <div class="proj">
+    <div class="prow">
+      <span class="pname">Marketing Analytics Data Platform</span>
+      <span class="pstack">Go / Node.js</span>
+    </div>
+    <div class="pdesc">Real-time click ingestion enriched with ad-spend across search, social and push networks; ROI attribution into Snowflake.</div>
+  </div>
+
+  <div class="proj">
+    <div class="prow">
+      <span class="pname">University Exam &amp; Result System</span>
+      <span class="pstack">Django</span>
+    </div>
+    <div class="pdesc">Solo-owned, 9 years in production; custom academic rules engine, GPA computation, audit logs.</div>
+  </div>
+
+  <div class="proj">
+    <div class="prow">
+      <span class="pname">E-Commerce SaaS</span>
+      <span class="pstack">Next.js</span>
+    </div>
+    <div class="pdesc">Shopify-like multi-tenant platform; sandboxed theme engine, build pipeline, Terraform AWS infra.</div>
+  </div>
+
+  <h2 class="sec">Experience</h2>
+
+  <div class="job">
+    <div class="row">
+      <div class="role">Senior Full Stack Software Engineer <span class="co">· Local Staffing LLC</span></div>
+      <div class="period">Jul 2015 – Present · 11 yrs</div>
+    </div>
+    <div class="desc">
+      Build scalable systems serving millions a month: high-throughput email &amp; SMS platforms,
+      exactly-once data pipelines, API gateways and analytics, across Python, Node.js and Go. Own
+      architecture end to end; lead frontend where needed.
+    </div>
+  </div>
+
+  <div class="pasthead">Past Roles</div>
+  <ul class="pastlist">
+    <li><span class="role">Senior Python Developer, Backend</span> <span class="co">· Durlov</span> <span class="yr">2016–2018</span>. Mobile-app backends: DRF APIs, Celery jobs, realtime chat over WebSocket (Django Channels); managed AWS EC2.</li>
+    <li><span class="role">Lead Developer</span> <span class="co">· Transcendio</span> <span class="yr">2014–2015</span>. Led the web team building products on Django / Laravel with an AngularJS frontend.</li>
+    <li><span class="role">Web Application Developer</span> <span class="co">· Vitzo.com</span> <span class="yr">2012–2015</span>. PHP / CodeIgniter with heavy jQuery; Google Apps automation, browser extensions, a Python/Tornado realtime chat app.</li>
+    <li><span class="role">Python / Django Developer</span> <span class="co">· AirCourts</span> <span class="yr">2013–2014</span>. Web app for a Portugal-based sports-booking startup (Django + DRF, AngularJS).</li>
+    <li><span class="role">Software Engineer / Product Co-ordinator</span> <span class="co">· okdo.it / Tasawr</span> <span class="yr">2012–2013</span>. SaaS on Zend Framework + AngularJS; translated business requirements into JIRA issues.</li>
+    <li><span class="role">Software Engineer</span> <span class="co">· Leevio</span> <span class="yr">2009–2012</span>. Web apps in PHP and Python; mobile apps with PhoneGap and Titanium.</li>
+  </ul>
+
+</body>
+</html>

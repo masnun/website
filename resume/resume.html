@@ -27,17 +27,17 @@
 
   @page {
     size: A4;
-    margin: 14mm 15mm 16mm 15mm;
+    margin: 10mm 13mm 10mm 13mm;
   }
 
   * { box-sizing: border-box; }
 
-  html { font-size: 10.2pt; }
+  html { font-size: 9.9pt; }
 
   body {
     font-family: "Inter", system-ui, sans-serif;
     color: var(--text);
-    line-height: 1.42;
+    line-height: 1.31;
     margin: 0;
     -weasy-hyphens: none;
   }
@@ -47,11 +47,11 @@
   /* ---------- Header band ---------- */
   .head {
     border-left: 4px solid var(--accent);
-    padding: 2px 0 12px 14px;
-    margin-bottom: 14px;
+    padding: 2px 0 9px 14px;
+    margin-bottom: 10px;
   }
   .name {
-    font-size: 25pt;
+    font-size: 23pt;
     font-weight: 800;
     letter-spacing: -0.6px;
     line-height: 1.05;
@@ -66,7 +66,7 @@
   .contact {
     font-size: 8.7pt;
     color: var(--muted);
-    line-height: 1.7;
+    line-height: 1.55;
   }
   .contact .sep { color: var(--border); margin: 0 6px; }
   .contact b { color: var(--text); font-weight: 600; }
@@ -78,13 +78,13 @@
     letter-spacing: 0.4px;
     text-transform: uppercase;
     color: var(--accent);
-    margin: 17px 0 9px;
+    margin: 9px 0 6px;
     padding-bottom: 4px;
     border-bottom: 1.5px solid var(--border);
   }
 
   .summary {
-    font-size: 9.7pt;
+    font-size: 9.4pt;
     color: #2b3140;
     margin: 0 0 4px;
   }
@@ -98,14 +98,20 @@
   .grid .col-main { flex: 1.45; }
   .grid .col-side { flex: 1; }
 
-  .skillgroup { margin-bottom: 8px; }
+  .skillgroup {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 3px;
+  }
   .skillgroup .label {
     font-size: 8.3pt;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 3px;
+    min-width: 88px;
+    flex-shrink: 0;
   }
-  .tags { line-height: 1.9; }
+  .tags { line-height: 1.55; }
   .tag {
     display: inline-block;
     font-family: "JetBrains Mono", monospace;
@@ -139,7 +145,7 @@
   .stat .lab { font-size: 8.6pt; color: var(--muted); }
 
   /* ---------- Experience ---------- */
-  .job { margin-bottom: 11px; }
+  .job { margin-bottom: 7px; }
   .job.tight { margin-bottom: 7px; }
   .job .row {
     display: flex;
@@ -147,7 +153,7 @@
     align-items: baseline;
     gap: 12px;
   }
-  .job .role { font-size: 10.3pt; font-weight: 700; }
+  .job .role { font-size: 10pt; font-weight: 700; }
   .job .co { font-weight: 600; color: var(--accent); }
   .job .period {
     font-family: "JetBrains Mono", monospace;
@@ -156,7 +162,7 @@
     color: var(--text);
     white-space: nowrap;
   }
-  .job .desc { font-size: 9.1pt; color: #353b49; margin-top: 2px; }
+  .job .desc { font-size: 8.8pt; color: #353b49; margin-top: 2px; }
   .pasthead {
     font-size: 8.6pt;
     font-weight: 700;
@@ -165,9 +171,9 @@
   }
   .pastlist { margin: 0; padding: 0; list-style: none; }
   .pastlist li {
-    font-size: 8.9pt;
+    font-size: 8.6pt;
     color: #353b49;
-    padding: 3px 0;
+    padding: 2px 0;
     border-bottom: 1px dotted var(--border);
   }
   .pastlist li:last-child { border-bottom: none; }
@@ -177,7 +183,7 @@
 
   /* ---------- Projects ---------- */
   .proj {
-    padding: 6px 0;
+    padding: 4px 0;
     border-bottom: 1px solid var(--border);
     break-inside: avoid;
   }
@@ -188,21 +194,21 @@
     align-items: baseline;
     gap: 12px;
   }
-  .proj .pname { font-size: 9.7pt; font-weight: 700; }
+  .proj .pname { font-size: 9.4pt; font-weight: 700; }
   .proj .pstack {
     font-family: "JetBrains Mono", monospace;
     font-size: 7.4pt;
     color: var(--accent);
     font-weight: 500;
   }
-  .proj .pdesc { font-size: 8.8pt; color: #353b49; margin-top: 2px; }
+  .proj .pdesc { font-size: 8.6pt; color: #353b49; margin-top: 2px; }
 
   .twocol { display: flex; gap: 22px; }
   .twocol > div { flex: 1; }
 
   .foot {
-    margin-top: 12px;
-    font-size: 8.3pt;
+    margin-top: 6px;
+    font-size: 8.1pt;
     color: var(--muted);
     border-top: 1px solid var(--border);
     padding-top: 7px;
@@ -226,12 +232,30 @@
   </header>
 
   <p class="summary">
-    Over 15 years of building and scaling distributed systems has taught me what makes software last,
-    and exactly where it breaks. These days, I pair that hard-won judgment with modern AI tooling to
-    ship faster without compromising on code quality. The AI handles the boilerplate and accelerates
-    execution, but I make the architectural calls and keep the quality bar high. The craft is still
-    human. I just have better leverage now.
+    For over 15 years I've been architecting and scaling distributed systems &mdash; high-throughput
+    messaging platforms, exactly-once data pipelines and API gateways that serve millions of requests
+    a day. Modern AI tooling gives me leverage on execution &mdash; the architectural calls and the
+    quality bar stay human.
   </p>
+
+  <h2 class="sec">Skills</h2>
+
+  <div class="skillgroup">
+    <span class="label">Languages</span>
+    <span class="tags"><span class="tag hot">Go</span><span class="tag hot">TypeScript / Node.js</span><span class="tag hot">Python</span><span class="tag">PHP</span><span class="tag">SQL</span></span>
+  </div>
+  <div class="skillgroup">
+    <span class="label">Backend &amp; Queues</span>
+    <span class="tags"><span class="tag">Django / DRF</span><span class="tag">Flask</span><span class="tag">Celery</span><span class="tag">Koa</span><span class="tag">BullMQ</span><span class="tag">Asynq</span><span class="tag">Chi / Echo</span><span class="tag">REST APIs</span><span class="tag">WebSockets</span></span>
+  </div>
+  <div class="skillgroup">
+    <span class="label">Data</span>
+    <span class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">MongoDB</span><span class="tag">Redis</span><span class="tag">Elasticsearch</span><span class="tag">Snowflake</span></span>
+  </div>
+  <div class="skillgroup">
+    <span class="label">Infra &amp; Frontend</span>
+    <span class="tags"><span class="tag">AWS (ECS, Lambda, RDS)</span><span class="tag">Terraform</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span><span class="tag">Linux</span><span class="tag">React / Redux</span><span class="tag">Next.js</span></span>
+  </div>
 
   <h2 class="sec">Highlighted Work</h2>
 
@@ -299,9 +323,9 @@
       <div class="period">Jul 2015 – Present · 11 yrs</div>
     </div>
     <div class="desc">
-      Scalable systems serving millions a month: high-throughput email &amp; SMS platforms,
-      exactly-once data pipelines, API gateways and analytics, across Python, Node.js and Go. Own
-      architecture end to end; lead frontend where needed.
+      High-throughput systems serving 3.5M+ requests and 400K+ messages a day: email &amp; SMS
+      platforms, exactly-once data pipelines, API gateways and analytics, across Python, Node.js
+      and Go. Own architecture end to end; lead frontend where needed.
     </div>
   </div>
 
@@ -314,6 +338,10 @@
     <li><span class="role">Software Engineer / Product Co-ordinator</span> <span class="co">· okdo.it / Tasawr</span> <span class="yr">2012–2013</span>. SaaS on Zend Framework + AngularJS; translated business requirements into JIRA issues.</li>
     <li><span class="role">Software Engineer</span> <span class="co">· Leevio</span> <span class="yr">2009–2012</span>. Web apps in PHP and Python; mobile apps with PhoneGap and Titanium.</li>
   </ul>
+
+  <div class="foot">
+    <b>Community:</b> Co-founder, Python Bangladesh (country's largest Python user group) · Founder, NodeSchool Khulna · Hundreds of technical deep-dives at masnun.com &amp; masnun.rocks
+  </div>
 
 </body>
 </html>

@@ -39,7 +39,7 @@ export const profile = {
   tagline: "Software Architecture · Distributed Systems · Go · Node.js · Python",
   // Rotating words for the animated hero headline.
   roles: [
-    "Technical Architect",
+    "Senior Software Engineer",
     "Backend Engineer",
     "Distributed Systems Engineer",
     "Pythonista",

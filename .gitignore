@@ -4,3 +4,8 @@ dist-server
 *.local
 .DS_Store
 .vscode
+
+# personal career research, not part of the site
+upwork-profile-analysis.*
+upwork-competitive-analysis.*
+upwork-job-hunting-strategy.*
